@@ -1,0 +1,380 @@
+<pre><font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~</b></font>$ cd cassandra
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra</b></font>$ cd apache-cassandra-3.11.0/
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0</b></font>$ cd bin
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ ./eqlsh
+bash: ./eqlsh: No such file or directory
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ ./eqlsh.
+bash: ./eqlsh.: No such file or directory
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ ./cqlsh
+Connected to <font color="#3465A4"><b>Test Cluster</b></font> at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.4 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh&gt; CREATE KEYSPACE students WITH REPLICATION={
+   ... &apos;class&apos;:&apos;SimpleStrategy&apos;,
+   ... &apos;replication_factor&apos;:1};
+cqlsh&gt; DESCRIBE KEYSPACES;
+
+students  system_schema  system_auth  system  system_distributed  system_traces
+
+cqlsh&gt; SELECT * FROM system.schema_keyspaces;
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;unconfigured table schema_keyspaces&quot;</b></font>
+cqlsh&gt; SELECT * FROM system_schema.keyspaces;
+
+ <font color="#CC0000"><b>keyspace_name</b></font>      | <font color="#75507B"><b>durable_writes</b></font> | <font color="#75507B"><b>replication</b></font>
+--------------------+----------------+-------------------------------------------------------------------------------------
+        <font color="#C4A000"><b>system_auth</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;1&apos;</b></font><font color="#3465A4"><b>}</b></font>
+      <font color="#C4A000"><b>system_schema</b></font> |           <font color="#4E9A06"><b>True</b></font> |                             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.LocalStrategy&apos;</b></font><font color="#3465A4"><b>}</b></font>
+ <font color="#C4A000"><b>system_distributed</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;3&apos;</b></font><font color="#3465A4"><b>}</b></font>
+             <font color="#C4A000"><b>system</b></font> |           <font color="#4E9A06"><b>True</b></font> |                             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.LocalStrategy&apos;</b></font><font color="#3465A4"><b>}</b></font>
+      <font color="#C4A000"><b>system_traces</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;2&apos;</b></font><font color="#3465A4"><b>}</b></font>
+           <font color="#C4A000"><b>students</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;1&apos;</b></font><font color="#3465A4"><b>}</b></font>
+
+(6 rows)
+cqlsh&gt; USE students;
+cqlsh:students&gt; create table Student_info(
+            ... rollno int PRIMARY KEY,
+            ... stdname text,
+            ... DateofJoining timestamp,
+            ... LastExamPercent double):
+            ... 
+[1]+  Stopped                 ./cqlsh
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ ./cqlsh
+Connected to <font color="#3465A4"><b>Test Cluster</b></font> at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.4 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh&gt; USE students
+   ... 
+[2]+  Stopped                 ./cqlsh
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ ./cqlsh
+Connected to <font color="#3465A4"><b>Test Cluster</b></font> at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.4 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh&gt; DESCRIBE KEYSPACES
+
+students  system_schema  system_auth  system  system_distributed  system_traces
+
+cqlsh&gt; SELECT * FROM system_schema.keyspaces
+   ... ;
+
+ <font color="#CC0000"><b>keyspace_name</b></font>      | <font color="#75507B"><b>durable_writes</b></font> | <font color="#75507B"><b>replication</b></font>
+--------------------+----------------+-------------------------------------------------------------------------------------
+        <font color="#C4A000"><b>system_auth</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;1&apos;</b></font><font color="#3465A4"><b>}</b></font>
+      <font color="#C4A000"><b>system_schema</b></font> |           <font color="#4E9A06"><b>True</b></font> |                             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.LocalStrategy&apos;</b></font><font color="#3465A4"><b>}</b></font>
+ <font color="#C4A000"><b>system_distributed</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;3&apos;</b></font><font color="#3465A4"><b>}</b></font>
+             <font color="#C4A000"><b>system</b></font> |           <font color="#4E9A06"><b>True</b></font> |                             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.LocalStrategy&apos;</b></font><font color="#3465A4"><b>}</b></font>
+      <font color="#C4A000"><b>system_traces</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;2&apos;</b></font><font color="#3465A4"><b>}</b></font>
+           <font color="#C4A000"><b>students</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;1&apos;</b></font><font color="#3465A4"><b>}</b></font>
+
+(6 rows)
+cqlsh&gt; USE students
+   ... ;
+cqlsh:students&gt; create table Student_info(
+            ...             ... rollno int PRIMARY KEY,
+            ...             ... stdname text,
+            ...             ... DateofJoining timestamp,
+            ...  LastExamPercent double);
+<font color="#CC0000"><b>SyntaxException: line 2:12 no viable alternative at input &apos;.&apos; (create table Student_info(            [.]...)</b></font>
+cqlsh:students&gt; create table Student_info( rollno int PRIMARY KEY, stdname text, DateofJoining timestamp, LastExamPercent double);
+cqlsh:students&gt; DESCRIBE TABLES;
+
+student_info
+
+cqlsh:students&gt; DESCRIBE TABLE student_info;
+
+CREATE TABLE students.student_info (
+    rollno int PRIMARY KEY,
+    dateofjoining timestamp,
+    lastexampercent double,
+    stdname text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {&apos;keys&apos;: &apos;ALL&apos;, &apos;rows_per_partition&apos;: &apos;NONE&apos;}
+    AND comment = &apos;&apos;
+    AND compaction = {&apos;class&apos;: &apos;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&apos;, &apos;max_threshold&apos;: &apos;32&apos;, &apos;min_threshold&apos;: &apos;4&apos;}
+    AND compression = {&apos;chunk_length_in_kb&apos;: &apos;64&apos;, &apos;class&apos;: &apos;org.apache.cassandra.io.compress.LZ4Compressor&apos;}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = &apos;99PERCENTILE&apos;;
+
+cqlsh:students&gt; BEGIN BATCH
+            ... INSERT INTO
+            ... student_info(RollNo,StudName,DateofJoining,LastExamPercent)
+            ... VALUES (1,&apos;Michael Storm&apos;,&apos;2012-03-29&apos;, 69.6)
+            ... INSERT INTO student_info
+            ... (RollNo,StudName,DateofJoining,LastExamPercent) VALUES
+            ... (2,&apos;Stephen Fox&apos;,&apos;2013-02-27&apos;, 72.5)
+            ... APPLY BATCH;
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;Undefined column name studname&quot;</b></font>
+cqlsh:students&gt; BEGIN BATCH INSERT INTO student_info(rollno,stdname,dateofjoining,lastexampercent) VALUES (1,&apos;Michael Storm&apos;,&apos;2012-03-29&apos;, 69.6) INSERT INTO student_info (rollno,stdname,dateofjoining,lastexampercent) VALUES (2,&apos;Stephen Fox&apos;,&apos;2013-02-27&apos;, 72.5) APPLY BATCH;
+cqlsh:students&gt; SELECT * from student_info;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>lastexampercent</b></font> | <font color="#75507B"><b>stdname</b></font>
+--------+---------------------------------+-----------------+---------------
+      <font color="#4E9A06"><b>1</b></font> | <font color="#4E9A06"><b>2012-03-28 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>69.6</b></font> | <font color="#C4A000"><b>Michael Storm</b></font>
+      <font color="#4E9A06"><b>2</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> |   <font color="#C4A000"><b>Stephen Fox</b></font>
+
+(2 rows)
+cqlsh:students&gt; script
+            ... 
+[3]+  Stopped                 ./cqlsh
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ script
+Script started, file is typescript
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ stopscript
+stopscript: command not found
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ script
+Script started, file is typescript
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ exit
+exit
+Script done, file is typescript
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ script output.txt
+Script started, file is output.txt
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ ./cqlsh
+Connected to <font color="#3465A4"><b>Test Cluster</b></font> at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.4 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh&gt; DESCRIBE KEYSPACES;
+
+students  system_schema  system_auth  system  system_distributed  system_traces
+
+cqlsh&gt; SELECT * FROM system_schema.keyspaces
+   ... ;
+
+ <font color="#CC0000"><b>keyspace_name</b></font>      | <font color="#75507B"><b>durable_writes</b></font> | <font color="#75507B"><b>replication</b></font>
+--------------------+----------------+-------------------------------------------------------------------------------------
+        <font color="#C4A000"><b>system_auth</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;1&apos;</b></font><font color="#3465A4"><b>}</b></font>
+      <font color="#C4A000"><b>system_schema</b></font> |           <font color="#4E9A06"><b>True</b></font> |                             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.LocalStrategy&apos;</b></font><font color="#3465A4"><b>}</b></font>
+ <font color="#C4A000"><b>system_distributed</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;3&apos;</b></font><font color="#3465A4"><b>}</b></font>
+             <font color="#C4A000"><b>system</b></font> |           <font color="#4E9A06"><b>True</b></font> |                             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.LocalStrategy&apos;</b></font><font color="#3465A4"><b>}</b></font>
+      <font color="#C4A000"><b>system_traces</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;2&apos;</b></font><font color="#3465A4"><b>}</b></font>
+           <font color="#C4A000"><b>students</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;1&apos;</b></font><font color="#3465A4"><b>}</b></font>
+
+(6 rows)
+cqlsh&gt; USE students;
+cqlsh:students&gt; create table Student_Info(
+            ... RollNo int PRIMARY KEY,
+            ... StudName text,
+            ... DateofJoining timestamp,
+            ... LastExamPercent double);
+<font color="#CC0000"><b>AlreadyExists: Table &apos;students.student_info&apos; already exists</b></font>
+cqlsh:students&gt; DESCRIBE TABLES;
+
+student_info
+
+cqlsh:students&gt; DESCRIBE TABLE student_info
+
+CREATE TABLE students.student_info (
+    rollno int PRIMARY KEY,
+    dateofjoining timestamp,
+    lastexampercent double,
+    stdname text
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {&apos;keys&apos;: &apos;ALL&apos;, &apos;rows_per_partition&apos;: &apos;NONE&apos;}
+    AND comment = &apos;&apos;
+    AND compaction = {&apos;class&apos;: &apos;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&apos;, &apos;max_threshold&apos;: &apos;32&apos;, &apos;min_threshold&apos;: &apos;4&apos;}
+    AND compression = {&apos;chunk_length_in_kb&apos;: &apos;64&apos;, &apos;class&apos;: &apos;org.apache.cassandra.io.compress.LZ4Compressor&apos;}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = &apos;99PERCENTILE&apos;;
+
+cqlsh:students&gt; SELECT * from student_info;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>lastexampercent</b></font> | <font color="#75507B"><b>stdname</b></font>
+--------+---------------------------------+-----------------+---------------
+      <font color="#4E9A06"><b>1</b></font> | <font color="#4E9A06"><b>2012-03-28 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>69.6</b></font> | <font color="#C4A000"><b>Michael Storm</b></font>
+      <font color="#4E9A06"><b>2</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> |   <font color="#C4A000"><b>Stephen Fox</b></font>
+
+(2 rows)
+cqlsh:students&gt; UPDATE student_info SET stdname=&apos;David Sheen&apos; WHERE rollno=2 ;
+cqlsh:students&gt; SELECT * FROM student_info WHERE rollno in (1,2,3);
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>lastexampercent</b></font> | <font color="#75507B"><b>stdname</b></font>
+--------+---------------------------------+-----------------+---------------
+      <font color="#4E9A06"><b>1</b></font> | <font color="#4E9A06"><b>2012-03-28 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>69.6</b></font> | <font color="#C4A000"><b>Michael Storm</b></font>
+      <font color="#4E9A06"><b>2</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> |   <font color="#C4A000"><b>David Sheen</b></font>
+
+(2 rows)
+cqlsh:students&gt; INSERT INTO student_info
+            ... (RollNo,StudName,DateofJoining,LastExamPercent) VALUES
+            ... (2,&apos;Stephen Fox&apos;,&apos;2013-02-27&apos;, 72.5);
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;Undefined column name studname&quot;</b></font>
+cqlsh:students&gt; INSERT INTO student_info (rollno,stdname,dateofjoining,lastexampercent) VALUES (2,&apos;Stephen Fox&apos;,&apos;2013-02-27&apos;, 72.5);
+cqlsh:students&gt; SELECT * from student_info;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>lastexampercent</b></font> | <font color="#75507B"><b>stdname</b></font>
+--------+---------------------------------+-----------------+---------------
+      <font color="#4E9A06"><b>1</b></font> | <font color="#4E9A06"><b>2012-03-28 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>69.6</b></font> | <font color="#C4A000"><b>Michael Storm</b></font>
+      <font color="#4E9A06"><b>2</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> |   <font color="#C4A000"><b>Stephen Fox</b></font>
+
+(2 rows)
+cqlsh:students&gt; INSERT INTO student_info (rollno,stdname,dateofjoining,lastexampercent) VALUES (3,&apos;Stephen Fox&apos;,&apos;2013-02-27&apos;, 72.5);
+cqlsh:students&gt; SELECT * from student_info;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>lastexampercent</b></font> | <font color="#75507B"><b>stdname</b></font>
+--------+---------------------------------+-----------------+---------------
+      <font color="#4E9A06"><b>1</b></font> | <font color="#4E9A06"><b>2012-03-28 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>69.6</b></font> | <font color="#C4A000"><b>Michael Storm</b></font>
+      <font color="#4E9A06"><b>2</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> |   <font color="#C4A000"><b>Stephen Fox</b></font>
+      <font color="#4E9A06"><b>3</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> |   <font color="#C4A000"><b>Stephen Fox</b></font>
+
+(3 rows)
+cqlsh:students&gt; INSERT INTO student_info (rollno,stdname,dateofjoining,lastexampercent) VALUES (4,&apos;Stephen Fox&apos;,&apos;2013-02-27&apos;, 72.5);
+cqlsh:students&gt; UPDATE student_info SET stdname=&apos;David Sheen&apos; WHERE rollno=2 ;
+cqlsh:students&gt; SELECT * from student_info;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>lastexampercent</b></font> | <font color="#75507B"><b>stdname</b></font>
+--------+---------------------------------+-----------------+---------------
+      <font color="#4E9A06"><b>1</b></font> | <font color="#4E9A06"><b>2012-03-28 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>69.6</b></font> | <font color="#C4A000"><b>Michael Storm</b></font>
+      <font color="#4E9A06"><b>2</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> |   <font color="#C4A000"><b>David Sheen</b></font>
+      <font color="#4E9A06"><b>4</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> |   <font color="#C4A000"><b>Stephen Fox</b></font>
+      <font color="#4E9A06"><b>3</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> |   <font color="#C4A000"><b>Stephen Fox</b></font>
+
+(4 rows)
+cqlsh:students&gt; CREATE INDEX ON student_info(stdname);
+cqlsh:students&gt; SELECT * FROM student_info WHERE stdname=&apos;Stephen Fox&apos;
+            ... ;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>lastexampercent</b></font> | <font color="#75507B"><b>stdname</b></font>
+--------+---------------------------------+-----------------+-------------
+      <font color="#4E9A06"><b>4</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> | <font color="#C4A000"><b>Stephen Fox</b></font>
+      <font color="#4E9A06"><b>3</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> | <font color="#C4A000"><b>Stephen Fox</b></font>
+
+(2 rows)
+cqlsh:students&gt; CREATE INDEX ON student_info(lastexampercent);
+cqlsh:students&gt; SELECT rollno,lastexampercent FROM student_info LIMIT 2;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>lastexampercent</b></font>
+--------+-----------------
+      <font color="#4E9A06"><b>1</b></font> |            <font color="#4E9A06"><b>69.6</b></font>
+      <font color="#4E9A06"><b>2</b></font> |            <font color="#4E9A06"><b>72.5</b></font>
+
+(2 rows)
+cqlsh:students&gt; SELECT rollno,stdname AS &quot;Name&quot; FROM student_info
+            ... ;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>Name</b></font>
+--------+---------------
+      <font color="#4E9A06"><b>1</b></font> | <font color="#C4A000"><b>Michael Storm</b></font>
+      <font color="#4E9A06"><b>2</b></font> |   <font color="#C4A000"><b>David Sheen</b></font>
+      <font color="#4E9A06"><b>4</b></font> |   <font color="#C4A000"><b>Stephen Fox</b></font>
+      <font color="#4E9A06"><b>3</b></font> |   <font color="#C4A000"><b>Stephen Fox</b></font>
+
+(4 rows)
+cqlsh:students&gt; UPDATE student_info SET stdname=&quot;Samaira&quot;, lastexampercent=85.7 WHERE rollno=3;
+<font color="#CC0000"><b>SyntaxException: line 1:41 no viable alternative at input &apos;,&apos; (UPDATE student_info SET stdname=[&quot;Samair]a&quot;,...)</b></font>
+cqlsh:students&gt; UPDATE student_info SET stdname=&quot;Samaira&quot;,lastexampercent=85.7 WHERE rollno=3;
+<font color="#CC0000"><b>SyntaxException: line 1:41 no viable alternative at input &apos;,&apos; (UPDATE student_info SET stdname=[&quot;Samair]a&quot;,...)</b></font>
+cqlsh:students&gt; UPDATE student_info SET stdname=&quot;Samaira&quot; lastexampercent=85.7 WHERE rollno=3;
+<font color="#CC0000"><b>SyntaxException: line 1:42 no viable alternative at input &apos;lastexampercent&apos; (UPDATE student_info SET stdname=[&quot;Samair]a&quot; lastexampercent...)</b></font>
+cqlsh:students&gt; UPDATE student_info
+            ... SET stdname=&quot;Samaira&quot; lastexampercent=85.7 WHERE rollno=3;
+<font color="#CC0000"><b>SyntaxException: line 2:22 no viable alternative at input &apos;lastexampercent&apos; (UPDATE student_infoSET stdname=[&quot;Samair]a&quot; lastexampercent...)</b></font>
+cqlsh:students&gt; UPDATE student_info
+            ... SET stdname=&apos;Samaira&apos;,lastexampercent=85.7
+            ... WHERE rollno=3;
+cqlsh:students&gt; SELECT rollno,stdname,lastexampercent
+            ... FROM student_info
+            ... WHERE rollno=3;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>stdname</b></font> | <font color="#75507B"><b>lastexampercent</b></font>
+--------+---------+-----------------
+      <font color="#4E9A06"><b>3</b></font> | <font color="#C4A000"><b>Samaira</b></font> |            <font color="#4E9A06"><b>85.7</b></font>
+
+(1 rows)
+cqlsh:students&gt; DELETE lastexampercent FROM student_info WHERE rollno=4;
+cqlsh:students&gt; SELECT * FROM student_info where rollno=4;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>lastexampercent</b></font> | <font color="#75507B"><b>stdname</b></font>
+--------+---------------------------------+-----------------+-------------
+      <font color="#4E9A06"><b>4</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#CC0000"><b>null</b></font> | <font color="#C4A000"><b>Stephen Fox</b></font>
+
+(1 rows)
+cqlsh:students&gt; DELETE FROM student_info WHERE rollno=4;
+cqlsh:students&gt; SELECT * FROM student_info where rollno=4;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>dateofjoining</b></font> | <font color="#75507B"><b>lastexampercent</b></font> | <font color="#75507B"><b>stdname</b></font>
+--------+---------------+-----------------+---------
+
+(0 rows)
+cqlsh:students&gt; SELECT * FROM student_info
+            ... ;
+
+ <font color="#CC0000"><b>rollno</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>lastexampercent</b></font> | <font color="#75507B"><b>stdname</b></font>
+--------+---------------------------------+-----------------+---------------
+      <font color="#4E9A06"><b>1</b></font> | <font color="#4E9A06"><b>2012-03-28 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>69.6</b></font> | <font color="#C4A000"><b>Michael Storm</b></font>
+      <font color="#4E9A06"><b>2</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>72.5</b></font> |   <font color="#C4A000"><b>David Sheen</b></font>
+      <font color="#4E9A06"><b>3</b></font> | <font color="#4E9A06"><b>2013-02-26 18:30:00.000000+0000</b></font> |            <font color="#4E9A06"><b>85.7</b></font> |       <font color="#C4A000"><b>Samaira</b></font>
+
+(3 rows)
+cqlsh:students&gt; CREATE TABLE project_details(
+            ... project_id int,
+            ... project_name text,
+            ... stdname text,
+            ... rating double,
+            ... duration int,
+            ... PRIMARY KEY(project_id,project_name)
+            ... );
+cqlsh:students&gt; BEGIN BATCH
+            ... INSERT INTO project_details VALUES (1,&apos;MS data migration&apos;, &apos;David Sheen&apos;,3.5, 720)
+            ... INSERT INTO project_details VALUES (1,&apos;MS data WarehouseSET stdname=&quot;Samaira&quot; lastexampercent=85.7 WHERE rollno=3;&apos;, &apos;David Sheen&apos;,3.5, 720)
+            ... APPLY BATCH;
+<font color="#CC0000"><b>SyntaxException: line 2:28 no viable alternative at input &apos;VALUES&apos; (BEGIN BATCHINSERT INTO [project_details] VALUES...)</b></font>
+cqlsh:students&gt; BEGIN BATCH
+            ...  INSERT INTO project_details VALUES (1,&apos;MS data migration&apos;, &apos;David Sheen&apos;,3.5, 720) 
+            ...  INSERT INTO project_details VALUES (1,&apos;MS data Warehouse&apos;, &apos;David Sheen&apos;,3.9, 1440) 
+            ...  INSERT INTO project_details VALUES (2,&apos;SAP Reporting&apos;, &apos;Stephen Fox&apos;,4.2, 3000) 
+            ...  INSERT INTO project_details VALUES (2,&apos;SAP BI DW&apos;, &apos;Stephen Fox&apos;,4, 9000) 
+            ... APPLY BATCH;
+<font color="#CC0000"><b>SyntaxException: line 2:29 no viable alternative at input &apos;VALUES&apos; (BEGIN BATCH INSERT INTO [project_details] VALUES...)</b></font>
+cqlsh:students&gt; BEGIN BATCH  INSERT INTO project_details(project_id, project_name, stdname, rating, duration) VALUES (1,&apos;MS data migration&apos;, &apos;David Sheen&apos;,3.5, 720)   INSERT INTO project_details(project_id, project_name, stdname, rating, duration) VALUES (1,&apos;MS data Warehouse&apos;, &apos;David Sheen&apos;,3.9, 1440)   INSERT INTO project_details(project_id, project_name, stdname, rating, duration) VALUES (2,&apos;SAP Reporting&apos;, &apos;Stephen Fox&apos;,4.2, 3000)   INSERT INTO project_details(project_id, project_name, stdname, rating, duration) VALUES (2,&apos;SAP BI DW&apos;, &apos;Stephen Fox&apos;,4, 9000)  APPLY BATCH;
+cqlsh:students&gt; SELECT * FROM project_details;
+
+ <font color="#CC0000"><b>project_id</b></font> | <font color="#06989A"><b>project_name</b></font>      | <font color="#75507B"><b>duration</b></font> | <font color="#75507B"><b>rating</b></font> | <font color="#75507B"><b>stdname</b></font>
+------------+-------------------+----------+--------+-------------
+          <font color="#4E9A06"><b>1</b></font> | <font color="#C4A000"><b>MS data Warehouse</b></font> |     <font color="#4E9A06"><b>1440</b></font> |    <font color="#4E9A06"><b>3.9</b></font> | <font color="#C4A000"><b>David Sheen</b></font>
+          <font color="#4E9A06"><b>1</b></font> | <font color="#C4A000"><b>MS data migration</b></font> |      <font color="#4E9A06"><b>720</b></font> |    <font color="#4E9A06"><b>3.5</b></font> | <font color="#C4A000"><b>David Sheen</b></font>
+          <font color="#4E9A06"><b>2</b></font> |         <font color="#C4A000"><b>SAP BI DW</b></font> |     <font color="#4E9A06"><b>9000</b></font> |      <font color="#4E9A06"><b>4</b></font> | <font color="#C4A000"><b>Stephen Fox</b></font>
+          <font color="#4E9A06"><b>2</b></font> |     <font color="#C4A000"><b>SAP Reporting</b></font> |     <font color="#4E9A06"><b>3000</b></font> |    <font color="#4E9A06"><b>4.2</b></font> | <font color="#C4A000"><b>Stephen Fox</b></font>
+
+(4 rows)
+cqlsh:students&gt; SELECT * FROM project_details WHERE project_id=1;
+
+ <font color="#CC0000"><b>project_id</b></font> | <font color="#06989A"><b>project_name</b></font>      | <font color="#75507B"><b>duration</b></font> | <font color="#75507B"><b>rating</b></font> | <font color="#75507B"><b>stdname</b></font>
+------------+-------------------+----------+--------+-------------
+          <font color="#4E9A06"><b>1</b></font> | <font color="#C4A000"><b>MS data Warehouse</b></font> |     <font color="#4E9A06"><b>1440</b></font> |    <font color="#4E9A06"><b>3.9</b></font> | <font color="#C4A000"><b>David Sheen</b></font>
+          <font color="#4E9A06"><b>1</b></font> | <font color="#C4A000"><b>MS data migration</b></font> |      <font color="#4E9A06"><b>720</b></font> |    <font color="#4E9A06"><b>3.5</b></font> | <font color="#C4A000"><b>David Sheen</b></font>
+
+(2 rows)
+cqlsh:students&gt; SELECT * FROM project_details WHERE project_id IN (1,2)
+            ... ORDER BY project_name DESC;
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;Cannot page queries with both ORDER BY and a IN restriction on the partition key; you must either remove the ORDER BY or the IN and sort client side, or disable paging for this query&quot;</b></font>
+cqlsh:students&gt; PAGING OFF;
+Disabled Query paging.
+cqlsh:students&gt; SELECT * FROM project_details WHERE project_id IN (1,2) ORDER BY project_name DESC;
+
+ <font color="#CC0000"><b>project_id</b></font> | <font color="#06989A"><b>project_name</b></font>      | <font color="#75507B"><b>duration</b></font> | <font color="#75507B"><b>rating</b></font> | <font color="#75507B"><b>stdname</b></font>
+------------+-------------------+----------+--------+-------------
+          <font color="#4E9A06"><b>2</b></font> |     <font color="#C4A000"><b>SAP Reporting</b></font> |     <font color="#4E9A06"><b>3000</b></font> |    <font color="#4E9A06"><b>4.2</b></font> | <font color="#C4A000"><b>Stephen Fox</b></font>
+          <font color="#4E9A06"><b>2</b></font> |         <font color="#C4A000"><b>SAP BI DW</b></font> |     <font color="#4E9A06"><b>9000</b></font> |      <font color="#4E9A06"><b>4</b></font> | <font color="#C4A000"><b>Stephen Fox</b></font>
+          <font color="#4E9A06"><b>1</b></font> | <font color="#C4A000"><b>MS data migration</b></font> |      <font color="#4E9A06"><b>720</b></font> |    <font color="#4E9A06"><b>3.5</b></font> | <font color="#C4A000"><b>David Sheen</b></font>
+          <font color="#4E9A06"><b>1</b></font> | <font color="#C4A000"><b>MS data Warehouse</b></font> |     <font color="#4E9A06"><b>1440</b></font> |    <font color="#4E9A06"><b>3.9</b></font> | <font color="#C4A000"><b>David Sheen</b></font>
+
+(4 rows)
+cqlsh:students&gt; PAGING ON;
+Now Query paging is enabled
+Page size: 100
+cqlsh:students&gt; exit
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ exit
+exit
+Script done, file is output.txt
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ 
+</pre>
