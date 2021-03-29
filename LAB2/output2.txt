@@ -1,0 +1,214 @@
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.10 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh> CREATE KEYSPACE Library WITH REPLICATION={
+   ... 'class':'SimpleStrategy',
+   ... 'replication_factor':1};
+cqlsh> DESCRIBE KEYSPACES
+
+system_schema  system_auth  system  library  system_distributed  system_traces
+
+cqlsh> SELECT * FROM sytem.schema_keyspaces ;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Keyspace sytem does not exist"
+cqlsh> SELECT * FROM system.schema_keyspaces ;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="unconfigured table schema_keyspaces"
+cqlsh> SELECT * FROM system_schema.keyspaces ;
+
+ keyspace_name      | durable_writes | replication
+--------------------+----------------+-------------------------------------------------------------------------------------
+        system_auth |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+      system_schema |           True |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+            library |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+ system_distributed |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
+             system |           True |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+      system_traces |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
+
+(6 rows)
+cqlsh> USE Library;
+cqlsh:library> create table library_info(
+           ... studid int PRIMARY KEY,
+           ... countval counter,
+;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Cannot mix counter and non counter columns in the same table"
+cqlsh:library> create table library_info(
+           ... studid int PRIMARY KEY,
+           ... countval counter);
+cqlsh:library> DEscribe table library_info
+
+CREATE TABLE library.library_info (
+    studid int PRIMARY KEY,
+    countval counter
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+    AND comment = ''
+    AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+    AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = '99PERCENTILE';
+
+cqlsh:library> SELECT * FROM Library_info
+           ... ;
+
+ studid | countval
+--------+----------
+
+(0 rows)
+1';
+SyntaxException: Only expressions of the form X = X +<value> are supported.
+';
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Invalid STRING constant (001) for "studid" of type int"
+;
+cqlsh:library> SELECT * FROM Library_info;
+
+ studid | countval
+--------+----------
+    111 |        1
+
+(1 rows)
+;
+cqlsh:library> SELECT * FROM Library_info;
+
+ studid | countval
+--------+----------
+    111 |        2
+
+(1 rows)
+cqlsh:library> ALTER library_info
+           ... DROP countval
+           ... ;
+SyntaxException: line 1:6 no viable alternative at input 'library_info' ([ALTER] library_info...)
+cqlsh:library> ALTER table library_info
+           ... DROP countval;
+cqlsh:library> SELECT * FROM Library_info;
+
+ studid
+--------
+
+(0 rows)
+cqlsh:library> ALTER TABLE library_info ADD studname text;
+ConfigurationException: Cannot add a non counter column (studname) in a counter column family
+cqlsh:library> DROP tablelibrary_info;
+SyntaxException: line 1:5 no viable alternative at input 'tablelibrary_info' ([DROP] tablelibrary_info...)
+cqlsh:library> DROP table library_info;
+cqlsh:library> DESCRIBE COLUMNFAMILIES;
+
+<empty>
+
+cqlsh:library> create table library_info(
+           ... studid int PRIMARY KEY,
+           ... studname text,
+           ... bookname text,
+           ... bookid int,
+           ... dateofissue timestamp) ;
+cqlsh:library> SELECT * FROM Library_info;
+
+ studid | bookid | bookname | dateofissue | studname
+--------+--------+----------+-------------+----------
+
+(0 rows)
+cqlsh:library> BEGIN BATCH
+           ... INSERT INTO 
+           ... library_info(
+           ... studid,studname,bookname ,bookid,dateofissue)
+           ... VALUES
+           ... (1,'Michael Storm','BDA Beginner',10000,'2012-03-29')
+issue) VALUES
+           ... (2,'Stephen Fox','Cassandra 3.1.11',10001,'2012-03-30')
+           ... APPLY BATCH;
+cqlsh:library> SELECT * FROM Library_info;
+
+ studid | bookid | bookname         | dateofissue                     | studname
+--------+--------+------------------+---------------------------------+---------------
+      1 |  10000 |     BDA Beginner | 2012-03-29 00:00:00.000000+0000 | Michael Storm
+      2 |  10001 | Cassandra 3.1.11 | 2012-03-30 00:00:00.000000+0000 |   Stephen Fox
+
+(2 rows)
+cqlsh:library> ALTER TABLE library_info add counter int
+           ... ;
+cqlsh:library> ;
+SyntaxException: line 1:0 no viable alternative at input ';' ([;])
+cqlsh:library> SELECT * FROM Library_info;
+
+ studid | bookid | bookname         | counter | dateofissue                     | studname
+--------+--------+------------------+---------+---------------------------------+---------------
+      1 |  10000 |     BDA Beginner |    null | 2012-03-29 00:00:00.000000+0000 | Michael Storm
+      2 |  10001 | Cassandra 3.1.11 |    null | 2012-03-30 00:00:00.000000+0000 |   Stephen Fox
+
+(2 rows)
+cqlsh:library> ;
+SyntaxException: line 1:0 no viable alternative at input ';' ([;])
+cqlsh:library> UPDATE library_info SET
+           ... counter=2 WHERE studid=1
+           ... ;
+cqlsh:library> UPDATE library_info SET
+           ... counter=2 WHERE studid=1
+           ... ;
+cqlsh:library> UPDATE library_info SET
+           ... counter=1 WHERE studid=2;
+cqlsh:library> SELECT * FROM Library_info;
+
+ studid | bookid | bookname         | counter | dateofissue                     | studname
+--------+--------+------------------+---------+---------------------------------+---------------
+      1 |  10000 |     BDA Beginner |       2 | 2012-03-29 00:00:00.000000+0000 | Michael Storm
+      2 |  10001 | Cassandra 3.1.11 |       1 | 2012-03-30 00:00:00.000000+0000 |   Stephen Fox
+
+(2 rows)
+cqlsh:library> SELECT bookname, counter FROM Library_info where studid=1;
+
+ bookname     | counter
+--------------+---------
+ BDA Beginner |       2
+
+(1 rows)
+cqlsh:library> SELECT studid,bookname, counter FROM Library_info where studid=1
+           ... ;
+
+ studid | bookname     | counter
+--------+--------------+---------
+      1 | BDA Beginner |       2
+
+(1 rows)
+cqlsh:library> COPY library_info(studid,studname,bookname ,bookid,dateofissue)
+           ... TO '/content/libinfo.csv' WITH HEADER = TRUE ;
+Using 1 child processes
+
+Starting copy of library.library_info with columns [studid, studname, bookname, bookid, dateofissue].
+Processed: 2 rows; Rate:       3 rows/s; Avg. rate:       3 rows/s
+2 rows exported to 1 files in 0.689 seconds.
+cqlsh:library> TRUNCATE library_info ;
+cqlsh:library> SELECT * FROM library_info;
+
+ studid | bookid | bookname | counter | dateofissue | studname
+--------+--------+----------+---------+-------------+----------
+
+(0 rows)
+cqlsh:library> COPY library_info(studid,studname,bookname ,bookid,dateofissue)
+           ... FROM•'/content/libinfo.csv' WITH HEADER = TRUE ;
+Invalid syntax at line 2, char 5
+  FROM•'/content/libinfo.csv' WITH HEADER = TRUE ;
+      ^
+cqlsh:library> FROM '/content/libinfo.csv' WITH HEADER = TRUE ;
+SyntaxException: line 1:0 no viable alternative at input 'FROM' ([FROM]...)
+cqlsh:library> COPY library_info(studid,studname,bookname ,bookid,dateofissue)
+           ... FROM '/content/libinfo.csv' WITH HEADER = TRUE ;
+Using 1 child processes
+
+Starting copy of library.library_info with columns [studid, studname, bookname, bookid, dateofissue].
+Processed: 2 rows; Rate:       4 rows/s; Avg. rate:       6 rows/s
+2 rows imported from 1 files in 0.356 seconds (0 skipped).
+cqlsh:library> SELECT * FROM library_info;
+
+ studid | bookid | bookname         | counter | dateofissue                     | studname
+--------+--------+------------------+---------+---------------------------------+---------------
+      1 |  10000 |     BDA Beginner |    null | 2012-03-29 00:00:00.000000+0000 | Michael Storm
+      2 |  10001 | Cassandra 3.1.11 |    null | 2012-03-30 00:00:00.000000+0000 |   Stephen Fox
+
+(2 rows)
+cqlsh:library> exit

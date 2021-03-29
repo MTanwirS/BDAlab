@@ -1,0 +1,350 @@
+<pre><font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~</b></font>$ typescript lab2.txt
+typescript: command not found
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~</b></font>$ script lab2.txt
+Script started, file is lab2.txt
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~</b></font>$ cd cassandra
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra</b></font>$ cd apache-cassandra-3.11.0/
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0</b></font>$ ./cqlsh
+bash: ./cqlsh: No such file or directory
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0</b></font>$ ls
+<font color="#3465A4"><b>bin</b></font>          <font color="#3465A4"><b>conf</b></font>  <font color="#3465A4"><b>interface</b></font>  <font color="#3465A4"><b>lib</b></font>          NEWS.txt    <font color="#3465A4"><b>pylib</b></font>
+CHANGES.txt  <font color="#3465A4"><b>doc</b></font>   <font color="#3465A4"><b>javadoc</b></font>    LICENSE.txt  NOTICE.txt  <font color="#3465A4"><b>tools</b></font>
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0</b></font>$ cd bin
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ ./cqlsh
+Connected to <font color="#3465A4"><b>Test Cluster</b></font> at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.5 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh&gt; SELECT * FROM system_schema.keyspaces
+   ... ;
+
+ <font color="#CC0000"><b>keyspace_name</b></font>      | <font color="#75507B"><b>durable_writes</b></font> | <font color="#75507B"><b>replication</b></font>
+--------------------+----------------+-------------------------------------------------------------------------------------
+            <font color="#C4A000"><b>student</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;1&apos;</b></font><font color="#3465A4"><b>}</b></font>
+        <font color="#C4A000"><b>system_auth</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;1&apos;</b></font><font color="#3465A4"><b>}</b></font>
+      <font color="#C4A000"><b>system_schema</b></font> |           <font color="#4E9A06"><b>True</b></font> |                             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.LocalStrategy&apos;</b></font><font color="#3465A4"><b>}</b></font>
+ <font color="#C4A000"><b>system_distributed</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;3&apos;</b></font><font color="#3465A4"><b>}</b></font>
+             <font color="#C4A000"><b>system</b></font> |           <font color="#4E9A06"><b>True</b></font> |                             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.LocalStrategy&apos;</b></font><font color="#3465A4"><b>}</b></font>
+      <font color="#C4A000"><b>system_traces</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;2&apos;</b></font><font color="#3465A4"><b>}</b></font>
+           <font color="#C4A000"><b>students</b></font> |           <font color="#4E9A06"><b>True</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;class&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;org.apache.cassandra.locator.SimpleStrategy&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;replication_factor&apos;</b></font><font color="#3465A4"><b>: </b></font><font color="#C4A000"><b>&apos;1&apos;</b></font><font color="#3465A4"><b>}</b></font>
+
+(7 rows)
+cqlsh&gt; CREATE KEYSPACE employee WITH REPLICation={class:&apos;SimpleStrategy&apos;, &apos;replication_factor&apos;:1};
+<font color="#CC0000"><b>SyntaxException: line 1:48 no viable alternative at input &apos;:&apos; (... KEYSPACE employee WITH REPLICation={[class]:...)</b></font>
+cqlsh&gt; CREATE KEYSPACE employee WITH REPLICATION={&apos;class&apos;:&apos;SimpleStrategy&apos;, &apos;replication_factor&apos;:1};
+cqlsh&gt; USE employee;
+cqlsh:employee&gt; CREATE TABLE employee-info(emp_id int PRIMARY KEY, emp_name text, designation text, DateofJoining timestamp, salary double,Dept_name text );
+<font color="#CC0000"><b>SyntaxException: line 1:21 no viable alternative at input &apos;-&apos; (CREATE TABLE [employee]-...)</b></font>
+cqlsh:employee&gt; CREATE TABLE employee_info(emp_id int PRIMARY KEY, emp_name text, designation text, DateofJoining timestamp, salary double,Dept_name text );
+cqlsh:employee&gt; DESCRIBE TABLES;
+
+employee_info
+
+cqlsh:employee&gt; DESCRIBE TABLE employee_info;
+
+CREATE TABLE employee.employee_info (
+    emp_id int PRIMARY KEY,
+    dateofjoining timestamp,
+    dept_name text,
+    designation text,
+    emp_name text,
+    salary double
+) WITH bloom_filter_fp_chance = 0.01
+    AND caching = {&apos;keys&apos;: &apos;ALL&apos;, &apos;rows_per_partition&apos;: &apos;NONE&apos;}
+    AND comment = &apos;&apos;
+    AND compaction = {&apos;class&apos;: &apos;org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy&apos;, &apos;max_threshold&apos;: &apos;32&apos;, &apos;min_threshold&apos;: &apos;4&apos;}
+    AND compression = {&apos;chunk_length_in_kb&apos;: &apos;64&apos;, &apos;class&apos;: &apos;org.apache.cassandra.io.compress.LZ4Compressor&apos;}
+    AND crc_check_chance = 1.0
+    AND dclocal_read_repair_chance = 0.1
+    AND default_time_to_live = 0
+    AND gc_grace_seconds = 864000
+    AND max_index_interval = 2048
+    AND memtable_flush_period_in_ms = 0
+    AND min_index_interval = 128
+    AND read_repair_chance = 0.0
+    AND speculative_retry = &apos;99PERCENTILE&apos;;
+
+cqlsh:employee&gt; BEGIN BATCH
+            ... ;
+            ... ;
+            ... APPLY BATCH;
+<font color="#CC0000"><b>SyntaxException: line 2:0 mismatched input &apos;;&apos; expecting K_APPLY (BEGIN BATCH[;]...)</b></font>
+cqlsh:employee&gt; BEGIN BATCH INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (100, &apos;Eva Smart&apos;, &apos;HOD&apos;, &apos;2020-02-28&apos;,50000.00,&apos;CSE&apos; )
+            ...  INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (120, &apos;Kelsey Stephens&apos;, &apos;Professor&apos;, &apos;2020-03-08&apos;,49000.00,&apos;CSE&apos; )
+            ...  INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (120, &apos;Vince Poole&apos;, &apos;Professor&apos;, &apos;2020-03-08&apos;,49000.00,&apos;CSE&apos; )
+            ...  INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (120, &apos;Laurel Dittman&apos;, &apos;Associate Professor&apos;, &apos;2020-03-08&apos;,48000.00,&apos;CSE&apos; )
+            ...  INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (121, &apos;Horace Rice&apos;, &apos;Associate Professor&apos;, &apos;2020-03-08&apos;,48000.00,&apos;CSE&apos; )
+            ...  INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (123, &apos;Phyllis Douglas&apos;, &apos;Assistant Professor&apos;, &apos;2020-03-10&apos;,47000.00,&apos;CSE&apos; )
+            ... APPLY BATCH ;
+cqlsh:employee&gt; SELECT * from employee_info
+            ... ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |     <font color="#C4A000"><b>Horace Rice</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+
+(4 rows)
+cqlsh:employee&gt; BEGIN BATCH INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (109, &apos;Kelsey Stephens&apos;, &apos;Professor&apos;, &apos;2020-03-08&apos;,49000.00,&apos;CSE&apos; ) INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (110, &apos;Vince Poole&apos;, &apos;Professor&apos;, &apos;2020-03-08&apos;,49000.00,&apos;CSE&apos; )  INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (122, &apos;Laurel Dittman&apos;, &apos;Associate Professor&apos;, &apos;2020-03-08&apos;,48000.00,&apos;CSE&apos; )  APPLY BATCH ;
+cqlsh:employee&gt; SELECT * from employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------
+    <font color="#4E9A06"><b>110</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |  <font color="#C4A000"><b>Laurel Dittman</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |     <font color="#C4A000"><b>Horace Rice</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+
+(7 rows)
+cqlsh:employee&gt; DELETE from employee_info WHERE emp_id=110;
+cqlsh:employee&gt; SELECT * from employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |  <font color="#C4A000"><b>Laurel Dittman</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |     <font color="#C4A000"><b>Horace Rice</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+
+(6 rows)
+cqlsh:employee&gt; UPDATE employee_info SET emp_name=&apos;Edwin Mendoza&apos;,Dept_name=&apos;ISE&apos; WHERE emp_id=121;
+cqlsh:employee&gt; SELECT * from employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |  <font color="#C4A000"><b>Laurel Dittman</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>ISE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |   <font color="#C4A000"><b>Edwin Mendoza</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+
+(6 rows)
+cqlsh:employee&gt; SELECT * FROM employee_info ORDER BY salary ASC;
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;ORDER BY is only supported when the partition key is restricted by an EQ or an IN.&quot;</b></font>
+cqlsh:employee&gt; SELECT * FROM employee_info WHERE emp_id=* ORDER BY salary ASC;
+<font color="#CC0000"><b>SyntaxException: line 1:41 no viable alternative at input &apos;*&apos; (...* FROM employee_info WHERE emp_id=[*]...)</b></font>
+cqlsh:employee&gt; SELECT * FROM employee_info WHERE salary&gt;0 ORDER BY salary ASC;
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;Cannot execute this query as it might involve data filtering and thus may have unpredictable performance. If you want to execute this query despite the performance unpredictability, use ALLOW FILTERING&quot;</b></font>
+cqlsh:employee&gt; SELECT * FROM employee_info WHERE salary &gt; 0 ORDER BY salary ASC;
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;Cannot execute this query as it might involve data filtering and thus may have unpredictable performance. If you want to execute this query despite the performance unpredictability, use ALLOW FILTERING&quot;</b></font>
+cqlsh:employee&gt; SELECT * FROM employee_info WHERE salary &gt; 0, emp_id IN 8 ORDER BY salary ASC;
+<font color="#CC0000"><b>SyntaxException: line 1:44 mismatched input &apos;,&apos; expecting EOF (... employee_info WHERE salary &gt; 0[,]...)</b></font>
+cqlsh:employee&gt; SELECT * FROM employee_info WHERE salary &gt; 0, emp_id IN * ORDER BY salary ASC;
+<font color="#CC0000"><b>SyntaxException: line 1:44 mismatched input &apos;,&apos; expecting EOF (... employee_info WHERE salary &gt; 0[,]...)</b></font>
+cqlsh:employee&gt; SELECT * FROM employee_info WHERE emp_id IN * ORDER BY salary ASC;
+<font color="#CC0000"><b>SyntaxException: line 1:44 no viable alternative at input &apos;*&apos; (SELECT * FROM employee_info WHERE [emp_id] IN...)</b></font>
+cqlsh:employee&gt; SELECT * FROM employee_info WHERE emp_id IN (100, 1000) ORDER BY salary ASC;
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;Order by is currently only supported on the clustered columns of the PRIMARY KEY, got salary&quot;</b></font>
+cqlsh:employee&gt; SELECT * FROM employee_info WHERE salary&gt;0 ORDER BY salary ASC ALLOW FILTERING;
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;ORDER BY is only supported when the partition key is restricted by an EQ or an IN.&quot;</b></font>
+cqlsh:employee&gt; ALTER TABLE employee_info ADD projects set&lt;text&gt;
+            ... ;
+cqlsh:employee&gt; SELECT * from employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>projects</b></font> | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+----------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> |     <font color="#CC0000"><b>null</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |     <font color="#CC0000"><b>null</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |  <font color="#C4A000"><b>Laurel Dittman</b></font> |     <font color="#CC0000"><b>null</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>ISE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |   <font color="#C4A000"><b>Edwin Mendoza</b></font> |     <font color="#CC0000"><b>null</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |     <font color="#CC0000"><b>null</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |     <font color="#CC0000"><b>null</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+
+(6 rows)
+cqlsh:employee&gt; CREATE INDEX ON employee_info(salary);
+cqlsh:employee&gt; SELECT * FROM employee_info ORDER BY salary
+            ... ;
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;ORDER BY is only supported when the partition key is restricted by an EQ or an IN.&quot;</b></font>
+cqlsh:employee&gt; DESC INDEX employee.employee_info_salary_idx
+
+CREATE INDEX employee_info_salary_idx ON employee.employee_info (salary);
+
+cqlsh:employee&gt; DESC INDEX employee.employee_info_salary_idx;
+
+CREATE INDEX employee_info_salary_idx ON employee.employee_info (salary);
+
+cqlsh:employee&gt; DROP INDEX IF EXISTS employee.employee_info_salary_idx
+            ... ;
+cqlsh:employee&gt; UPDATE employee_info SET projects=projects+{Project1) WHERE emp_id=100;
+<font color="#CC0000"><b>SyntaxException: line 1:52 no viable alternative at input &apos;)&apos; (UPDATE employee_info SET projects=projects+[{]Project1)...)</b></font>
+cqlsh:employee&gt; UPDATE employee_info SET projects=projects+{Project1} WHERE emp_id=100;
+<font color="#CC0000"><b>SyntaxException: line 1:52 no viable alternative at input &apos;}&apos; (UPDATE employee_info SET projects=projects+[{]Project1}...)</b></font>
+cqlsh:employee&gt; UPDATE employee_info SET projects=projects+{&apos;Project1&apos;} WHERE emp_id=100;
+cqlsh:employee&gt; UPDATE employee_info SET projects=projects+{&apos;Project1&apos;} WHERE emp_id=109;
+cqlsh:employee&gt; UPDATE employee_info SET projects=projects+{&apos;Project1&apos;,&apos;Project2&apos;} WHERE emp_id=120;
+cqlsh:employee&gt; UPDATE employee_info SET projects=projects+{&apos;Project2&apos;} WHERE emp_id=123;
+cqlsh:employee&gt; UPDATE employee_info SET projects=projects+{&apos;Project2&apos;,&apos;Project4&apos;} WHERE emp_id=122;
+cqlsh:employee&gt; UPDATE employee_info SET projects=projects+{&apos;Project4&apos;} WHERE emp_id=121;
+cqlsh:employee&gt; INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (122, &apos;Conrad Menzie&apos;, &apos;Intern&apos;, &apos;2020-03-28&apos;,10000.00,&apos;CSE&apos;) USING TTL 30 ; 
+cqlsh:employee&gt; SELECT * FROM employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>projects</b></font>                 | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------------------------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> | <font color="#4E9A06"><b>2020-03-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |              <font color="#C4A000"><b>Intern</b></font> |   <font color="#C4A000"><b>Conrad Menzie</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>10000</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>ISE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |   <font color="#C4A000"><b>Edwin Mendoza</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+
+(6 rows)
+cqlsh:employee&gt; INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (101, &apos;Conrad Menzie&apos;, &apos;Intern&apos;, &apos;2020-03-28&apos;,10000.00,&apos;CSE&apos;) USING TTL 30 ; 
+cqlsh:employee&gt; SELECT * FROM employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>projects</b></font>                 | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------------------------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> |                            <font color="#CC0000"><b>null</b></font> |      <font color="#CC0000"><b>null</b></font> |                <font color="#CC0000"><b>null</b></font> |            <font color="#CC0000"><b>null</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |   <font color="#CC0000"><b>null</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>ISE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |   <font color="#C4A000"><b>Edwin Mendoza</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+    <font color="#4E9A06"><b>101</b></font> | <font color="#4E9A06"><b>2020-03-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |              <font color="#C4A000"><b>Intern</b></font> |   <font color="#C4A000"><b>Conrad Menzie</b></font> |                     <font color="#CC0000"><b>null</b></font> |  <font color="#4E9A06"><b>10000</b></font>
+
+(7 rows)
+cqlsh:employee&gt; SELECT * FROM employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>projects</b></font>                 | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------------------------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> |                            <font color="#CC0000"><b>null</b></font> |      <font color="#CC0000"><b>null</b></font> |                <font color="#CC0000"><b>null</b></font> |            <font color="#CC0000"><b>null</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |   <font color="#CC0000"><b>null</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>ISE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |   <font color="#C4A000"><b>Edwin Mendoza</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+
+(6 rows)
+cqlsh:employee&gt; INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (122, &apos;Laurel Dittman&apos;, &apos;Associate Professor&apos;, &apos;2020-03-08&apos;,48000.00,&apos;CSE&apos; );
+cqlsh:employee&gt; SELECT * FROM employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>projects</b></font>                 | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------------------------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |  <font color="#C4A000"><b>Laurel Dittman</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>ISE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |   <font color="#C4A000"><b>Edwin Mendoza</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+
+(6 rows)
+cqlsh:employee&gt; INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (101, &apos;Conrad Menzie&apos;, &apos;Intern&apos;, &apos;2020-03-28&apos;,10000.00,&apos;CSE&apos;) USING TTL 30 ; 
+cqlsh:employee&gt; INSERT INTO employee_info(emp_id, emp_name, designation, DateofJoining, salary, Dept_name) VALUES (101, &apos;Conrad Menzie&apos;, &apos;Intern&apos;, &apos;2020-03-28&apos;,10000.00,&apos;CSE&apos;) USING TTL 30 ; 
+cqlsh:employee&gt; SELECT * FROM employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>projects</b></font>                 | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------------------------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |  <font color="#C4A000"><b>Laurel Dittman</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>ISE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |   <font color="#C4A000"><b>Edwin Mendoza</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+    <font color="#4E9A06"><b>101</b></font> | <font color="#4E9A06"><b>2020-03-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |              <font color="#C4A000"><b>Intern</b></font> |   <font color="#C4A000"><b>Conrad Menzie</b></font> |                     <font color="#CC0000"><b>null</b></font> |  <font color="#4E9A06"><b>10000</b></font>
+
+(7 rows)
+cqlsh:employee&gt; SELECT * FROM employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>projects</b></font>                 | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------------------------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |  <font color="#C4A000"><b>Laurel Dittman</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>ISE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |   <font color="#C4A000"><b>Edwin Mendoza</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+    <font color="#4E9A06"><b>101</b></font> | <font color="#4E9A06"><b>2020-03-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |              <font color="#C4A000"><b>Intern</b></font> |   <font color="#C4A000"><b>Conrad Menzie</b></font> |                     <font color="#CC0000"><b>null</b></font> |  <font color="#4E9A06"><b>10000</b></font>
+
+(7 rows)
+cqlsh:employee&gt; SELECT * FROM employee_info ;
+
+ <font color="#CC0000"><b>emp_id</b></font> | <font color="#75507B"><b>dateofjoining</b></font>                   | <font color="#75507B"><b>dept_name</b></font> | <font color="#75507B"><b>designation</b></font>         | <font color="#75507B"><b>emp_name</b></font>        | <font color="#75507B"><b>projects</b></font>                 | <font color="#75507B"><b>salary</b></font>
+--------+---------------------------------+-----------+---------------------+-----------------+--------------------------+--------
+    <font color="#4E9A06"><b>120</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> |     <font color="#C4A000"><b>Vince Poole</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>123</b></font> | <font color="#4E9A06"><b>2020-03-09 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Assistant Professor</b></font> | <font color="#C4A000"><b>Phyllis Douglas</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>47000</b></font>
+    <font color="#4E9A06"><b>122</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |  <font color="#C4A000"><b>Laurel Dittman</b></font> | <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project2&apos;</b></font><font color="#3465A4"><b>, </b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>121</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>ISE</b></font> | <font color="#C4A000"><b>Associate Professor</b></font> |   <font color="#C4A000"><b>Edwin Mendoza</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project4&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>48000</b></font>
+    <font color="#4E9A06"><b>100</b></font> | <font color="#4E9A06"><b>2020-02-27 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |                 <font color="#C4A000"><b>HOD</b></font> |       <font color="#C4A000"><b>Eva Smart</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>50000</b></font>
+    <font color="#4E9A06"><b>109</b></font> | <font color="#4E9A06"><b>2020-03-07 18:30:00.000000+0000</b></font> |       <font color="#C4A000"><b>CSE</b></font> |           <font color="#C4A000"><b>Professor</b></font> | <font color="#C4A000"><b>Kelsey Stephens</b></font> |             <font color="#3465A4"><b>{</b></font><font color="#C4A000"><b>&apos;Project1&apos;</b></font><font color="#3465A4"><b>}</b></font> |  <font color="#4E9A06"><b>49000</b></font>
+
+(6 rows)
+cqlsh:employee&gt; exit
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ ./cqlsh
+Connected to <font color="#3465A4"><b>Test Cluster</b></font> at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.5 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh&gt; CREATE KEYSPACE library with REPLICATION=[&apos;class&apos;:&apos;SimpleStrategy&apos;,&apos;replication_factor&apos;:1};
+<font color="#CC0000"><b>SyntaxException: line 1:41 no viable alternative at input &apos;[&apos; (CREATE KEYSPACE library with [REPLICATION]=[...)</b></font>
+cqlsh&gt; CREATE KEYSPACE library with REPLICATION={&apos;class&apos;:&apos;SimpleStrategy&apos;,&apos;replication_factor&apos;:1};
+cqlsh&gt; USE library;
+cqlsh:library&gt; CREATE TABLE library_info(
+           ... ;
+<font color="#CC0000"><b>SyntaxException: line 2:0 no viable alternative at input &apos;;&apos; (CREATE TABLE library_info([;])</b></font>
+cqlsh:library&gt; CREATE TABLE library_info( stud_id int PRIMARY KEY, counter_value counter, stud_name text, book_name text, bookname text, book_id int, DateofIssue timestamp);
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;Cannot mix counter and non counter columns in the same table&quot;</b></font>
+cqlsh:library&gt; 
+cqlsh:library&gt; CREATE TABLE library_info( stud_id int PRIMARY KEY, stud_name text, book_name text, bookname text, book_id int, DateofIssue timestamp);
+cqlsh:library&gt; ALTER TABLE library_info ADD counter_value counter;
+<font color="#CC0000"><b>ConfigurationException: Cannot add a counter column (counter_value) in a non counter column family</b></font>
+cqlsh:library&gt; DROP TABLE library_info
+           ... ;
+cqlsh:library&gt; DESCRIBE TABLES;
+
+&lt;empty&gt;
+
+cqlsh:library&gt; CREATE TABLE library_info( stud_id int, stud_name text, book_name text, bookname text, book_id int, DateofIssue timestamp, counter_value counter , PRIMARY KEY (stud_id));
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;Cannot mix counter and non counter columns in the same table&quot;</b></font>
+cqlsh:library&gt; CREATE TABLE library_info( stud_id int PRIMARY KEY, stud_name text, book_name text, bookname text, book_id int, DateofIssue timestamp, counter_value counter);
+<font color="#CC0000"><b>InvalidRequest: Error from server: code=2200 [Invalid query] message=&quot;Cannot mix counter and non counter columns in the same table&quot;</b></font>
+cqlsh:library&gt; 
+cqlsh:library&gt; CREATE TABLE library_info( stud_id int PRIMARY KEY, counter_value counter);
+cqlsh:library&gt; ALTER TABLE library_info stud_name text, book_name text, bookname text, book_id int, DateofIssue timestamp ;
+<font color="#CC0000"><b>SyntaxException: line 1:25 no viable alternative at input &apos;stud_name&apos; (ALTER TABLE [library_info] stud_name...)</b></font>
+cqlsh:library&gt; ALTER TABLE library_info ADD stud_name text, book_name text, bookname text, book_id int, DateofIssue timestamp ;
+<font color="#CC0000"><b>SyntaxException: line 1:43 mismatched input &apos;,&apos; expecting EOF (... TABLE library_info ADD stud_name text[,] book_name...)</b></font>
+cqlsh:library&gt; ALTER TABLE library_info stud_name text
+           ... ;
+<font color="#CC0000"><b>SyntaxException: line 1:25 no viable alternative at input &apos;stud_name&apos; (ALTER TABLE [library_info] stud_name...)</b></font>
+cqlsh:library&gt; DROP TABLE library_info ;
+cqlsh:library&gt; CREATE TABLE library_info( stud_id int, stud_name text, book_name text, bookname text, book_id int, DateofIssue timestamp, counter_value counter , PRIMARY KEY (stud_id,stud_name,timestamp), book_idbook_name,);
+<font color="#CC0000"><b>SyntaxException: line 1:206 no viable alternative at input &apos;,&apos; (...(stud_id,stud_name,timestamp), book_idbook_name[,]...)</b></font>
+cqlsh:library&gt; CREATE TABLE library_info(stud_id int, stud_name text, book_name text, bookname text, book_id int, DateofIssue timestamp, counter_value counter , PRIMARY KEY (stud_id,stud_name), book_id,book_name,DateofIssue);
+<font color="#CC0000"><b>SyntaxException: line 1:186 no viable alternative at input &apos;,&apos; (...KEY (stud_id,stud_name), book_id[,]...)</b></font>
+cqlsh:library&gt; CREATE TABLE library_info(stud_id int, stud_name text, book_name text, bookname text, book_id int, DateofIssue timestamp, counter_value counter , PRIMARY KEY (stud_id,stud_name),book_id,book_name,DateofIssue);
+<font color="#CC0000"><b>SyntaxException: line 1:185 no viable alternative at input &apos;,&apos; (... KEY (stud_id,stud_name),book_id[,]...)</b></font>
+cqlsh:library&gt; CREATE TABLE library_info(stud_id int, stud_name text, book_name text, book_id int, DateofIssue timestamp, counter_value counter , PRIMARY KEY (stud_id,stud_name),book_id,book_name,DateofIssue);
+<font color="#CC0000"><b>SyntaxException: line 1:170 no viable alternative at input &apos;,&apos; (... KEY (stud_id,stud_name),book_id[,]...)</b></font>
+cqlsh:library&gt; CREATE TABLE library_info(stud_id int, stud_name text, book_name text, book_id int, DateofIssue timestamp, counter_value counter , PRIMARY KEY (stud_id,stud_name),book_id,book_name,DateofIssue);
+<font color="#CC0000"><b>SyntaxException: line 1:170 no viable alternative at input &apos;,&apos; (... KEY (stud_id,stud_name),book_id[,]...)</b></font>
+cqlsh:library&gt; CREATE TABLE library_info(stud_id int, stud_name text, book_name text, book_id int, DateofIssue timestamp, counter_value counter , PRIMARY KEY ((stud_id,stud_name),book_id,book_name,DateofIssue);
+<font color="#CC0000"><b>SyntaxException: line 1:194 mismatched input &apos;;&apos; expecting &apos;)&apos; (...,stud_name),book_id,book_name,DateofIssue)[;])</b></font>
+cqlsh:library&gt; CREATE TABLE library_info(stud_id int, stud_name text, book_name text, book_id int, DateofIssue timestamp, counter_value counter , PRIMARY KEY ((stud_id,stud_name),book_id,book_name,DateofIssue);
+<font color="#CC0000"><b>SyntaxException: line 1:194 mismatched input &apos;;&apos; expecting &apos;)&apos; (...,stud_name),book_id,book_name,DateofIssue)[;])</b></font>
+cqlsh:library&gt; CREATE TABLE library_info(stud_id int, stud_name text, book_name text, book_id int, DateofIssue timestamp, counter_value counter , PRIMARY KEY ((stud_id,stud_name),book_id,book_name,DateofIssue));
+cqlsh:library&gt; exit
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ stop
+
+Command &apos;stop&apos; not found, but there are 19 similar ones.
+
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ script
+Script started, file is typescript
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ script stop
+Script started, file is stop
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ exit
+exit
+Script done, file is stop
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ exit
+exit
+Script done, file is typescript
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~/cassandra/apache-cassandra-3.11.0/bin</b></font>$ exit
+exit
+Script done, file is lab2.txt
+<font color="#4E9A06"><b>bmsce@bmsce-Precision-T1700</b></font>:<font color="#3465A4"><b>~</b></font>$ 
+
+</pre>
