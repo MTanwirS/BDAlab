@@ -1,0 +1,481 @@
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.10 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+ation_factor':1};
+cqlsh> describe keyspaces;
+
+system_schema  system_auth  system  system_distributed  wmetro  system_traces
+
+cqlsh> select * from system_schema.keyspaces;
+
+ keyspace_name      | durable_writes | replication
+--------------------+----------------+-------------------------------------------------------------------------------------
+        system_auth |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+      system_schema |           True |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+ system_distributed |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
+             system |           True |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+             wmetro |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+      system_traces |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
+
+(6 rows)
+cqlsh> use wmetro
+   ... ;
+ile bigint,current_position text,skill set<text>);
+
+cqlsh:wmetro> select * from drivers;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="unconfigured table drivers"
+cqlsh:wmetro> select * from driver;
+
+ driver_name | current_position | mobile | password | skill
+-------------+------------------+--------+----------+-------
+
+(0 rows)
+cqlsh:wmetro> begin batch
+ill) values('Swen','123abc',9000000001,'Wellington',{'Passenger'})
+ill) values('Fred','234bcd',9000000002,'Upper Hutt',{'Passenger'})
+ill) values('Jane','345cde',9000000003,'Lower Hutt',{'Goods'})
+          ... apply batch;
+cqlsh:wmetro> select * from driver;
+
+ driver_name | current_position | mobile     | password | skill
+-------------+------------------+------------+----------+---------------
+        Fred |       Upper Hutt | 9000000002 |   234bcd | {'Passenger'}
+        Swen |       Wellington | 9000000001 |   123abc | {'Passenger'}
+        Jane |       Lower Hutt | 9000000003 |   345cde |     {'Goods'}
+
+(3 rows)
+ text);
+cqlsh:wmetro> begin batch
+tenance','Gulliver');
+ Hutt','Gulliver');
+r Hutt','Kiwi Rail');
+ington','Kiwi Rail');
+          ... apply batch;
+cqlsh:wmetro> select * from vehicles;
+
+ vehicle_id | status      | type
+------------+-------------+-----------
+     WR1236 |  Upper Hutt | Kiwi Rail
+     WR1234 | Maintenance |  Gulliver
+     WR1235 |   Lowe Hutt |  Gulliver
+     WR1237 |  Wellington | Kiwi Rail
+
+(4 rows)
+
+ine_name, station_name));
+cqlsh:wmetro> begin batch
+,longitude,time,distance) values('LINE1',2,'Wellington',-40.28,174.77,0605,0.0)
+ 
+ 
+,longitude,time,distance) values('LINE2',2,'Upper Hutt',-41.12,175.07,1550,0.0)
+          ... apply batch;
+cqlsh:wmetro> select * from time_table;
+
+ line_name | station_name | distance | latitude | longitude | service_num | time
+-----------+--------------+----------+----------+-----------+-------------+------
+     LINE2 |   Upper Hutt |        0 |   -41.12 |    175.07 |           2 | 1550
+     LINE2 |   Wellington |     34.3 |   -40.28 |    174.77 |           2 | 1130
+     LINE1 |   Upper Hutt |     34.3 |   -41.12 |    175.07 |           2 | 1025
+     LINE1 |   Wellington |        0 |   -40.28 |    174.77 |           2 |  605
+
+(4 rows)
+nce counter);
+ere vehicle_id=1234 ;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Invalid INTEGER constant (1234) for "vehicle_id" of type text"
+ere vehicle_id="WR1234" ;
+SyntaxException: line 1:90 no viable alternative at input ';' (...total_distance + 3000 where vehicle_id=["WR123]4" ;)
+ere vehicle_id='WR1234';
+ere vehicle_id='WR1235';
+ere vehicle_id='WR1236';
+ere vehicle_id='WR1237';
+cqlsh:wmetro> select * from VEHICLE_USAGE;
+
+ vehicle_id | total_distance
+------------+----------------
+     WR1236 |           3500
+     WR1234 |           3000
+     WR1235 |           5000
+     WR1237 |           5300
+
+(4 rows)
+itude double,longitude double,speed double);
+cqlsh:wmetro> begin batch 
+es(14,'2020-03-10',-42.30,171.50,76)
+es(14,'2020-03-10 10:07:40+1300',-42.50,171.90,75)
+es(14,'2020-03-10 10:30:25+1300',-44.50,160.60,75)
+          ... apply batch ;
+cqlsh:wmetro> select * from data_point;
+
+ sequence                        | day | latitude | longitude | speed
+---------------------------------+-----+----------+-----------+-------
+ 2020-03-09 21:30:25.000000+0000 |  14 |    -44.5 |     160.6 |    75
+ 2020-03-09 21:07:40.000000+0000 |  14 |    -42.5 |     171.9 |    75
+ 2020-03-10 00:00:00.000000+0000 |  14 |    -42.3 |     171.5 |    76
+
+(3 rows)
+ill) values('William','678bcf',9000000004,'Wellington',{'Goods','Passenger'})
+          ... ;
+cqlsh:wmetro> select * from driver;
+
+ driver_name | current_position | mobile     | password | skill
+-------------+------------------+------------+----------+------------------------
+        Fred |       Upper Hutt | 9000000002 |   234bcd |          {'Passenger'}
+        Swen |       Wellington | 9000000001 |   123abc |          {'Passenger'}
+     William |       Wellington | 9000000004 |   678bcf | {'Goods', 'Passenger'}
+        Jane |       Lower Hutt | 9000000003 |   345cde |              {'Goods'}
+
+(4 rows)
+cqlsh:wmetro> create index on driver(password);
+cqlsh:wmetro> select * from driver;
+
+ driver_name | current_position | mobile     | password | skill
+-------------+------------------+------------+----------+------------------------
+        Fred |       Upper Hutt | 9000000002 |   234bcd |          {'Passenger'}
+        Swen |       Wellington | 9000000001 |   123abc |          {'Passenger'}
+     William |       Wellington | 9000000004 |   678bcf | {'Goods', 'Passenger'}
+        Jane |       Lower Hutt | 9000000003 |   345cde |              {'Goods'}
+
+(4 rows)
+cqlsh:wmetro> update driver set password='789gfh' where driver_name='William';
+cqlsh:wmetro> select * from driver;
+
+ driver_name | current_position | mobile     | password | skill
+-------------+------------------+------------+----------+------------------------
+        Fred |       Upper Hutt | 9000000002 |   234bcd |          {'Passenger'}
+        Swen |       Wellington | 9000000001 |   123abc |          {'Passenger'}
+     William |       Wellington | 9000000004 |   789gfh | {'Goods', 'Passenger'}
+        Jane |       Lower Hutt | 9000000003 |   345cde |              {'Goods'}
+
+(4 rows)
+='William';
+cqlsh:wmetro> select * from driver;
+
+ driver_name | current_position | mobile     | password | skill
+-------------+------------------+------------+----------+------------------------
+        Fred |       Upper Hutt | 9000000002 |   234bcd |          {'Passenger'}
+        Swen |       Wellington | 9000000001 |   123abc |          {'Passenger'}
+     William |      Maintenance | 9000000004 |   789gfh | {'Goods', 'Passenger'}
+        Jane |       Lower Hutt | 9000000003 |   345cde |              {'Goods'}
+
+(4 rows)
+cqlsh:wmetro> update driver set skill={'Passenger'} where driver_name='Jane';
+cqlsh:wmetro> select * from driver;
+
+ driver_name | current_position | mobile     | password | skill
+-------------+------------------+------------+----------+------------------------
+        Fred |       Upper Hutt | 9000000002 |   234bcd |          {'Passenger'}
+        Swen |       Wellington | 9000000001 |   123abc |          {'Passenger'}
+     William |      Maintenance | 9000000004 |   789gfh | {'Goods', 'Passenger'}
+        Jane |       Lower Hutt | 9000000003 |   345cde |          {'Passenger'}
+
+(4 rows)
+Jane';
+cqlsh:wmetro> select * from driver;
+
+ driver_name | current_position | mobile     | password | skill
+-------------+------------------+------------+----------+------------------------
+        Fred |       Upper Hutt | 9000000002 |   234bcd |          {'Passenger'}
+        Swen |       Wellington | 9000000001 |   123abc |          {'Passenger'}
+     William |      Maintenance | 9000000004 |   789gfh | {'Goods', 'Passenger'}
+        Jane |       Lower Hutt | 9000000003 |   345cde | {'Goods', 'Passenger'}
+
+(4 rows)
+ password='789gfh';
+
+ [applied]
+-----------
+      True
+
+cqlsh:wmetro> select * from driver;
+
+ driver_name | current_position | mobile     | password | skill
+-------------+------------------+------------+----------+------------------------
+        Fred |       Upper Hutt | 9000000002 |   234bcd |          {'Passenger'}
+        Swen |       Wellington | 9000000001 |   123abc |          {'Passenger'}
+     William |      Maintenance | 9000000004 |   678bcf | {'Goods', 'Passenger'}
+        Jane |       Lower Hutt | 9000000003 |   345cde | {'Goods', 'Passenger'}
+
+(4 rows)
+cqlsh:wmetro> alter table driver add workdays int ;
+cqlsh:wmetro> update driver set workdays=22 where driver_name='William'
+          ... update driver set workdays=22 where driver_name='Fred';
+SyntaxException: line 2:0 mismatched input 'update' expecting EOF (...workdays=22 where driver_name='William'[update]...)
+cqlsh:wmetro> update driver set workdays=22 where driver_name='Fred';
+cqlsh:wmetro> update driver set workdays=22 where driver_name='William';
+cqlsh:wmetro> update driver set workdays=21 where driver_name='Jane';
+cqlsh:wmetro> update driver set workdays=22 where driver_name='Swen';
+cqlsh:wmetro> select * from driver;
+
+ driver_name | current_position | mobile     | password | skill                  | workdays
+-------------+------------------+------------+----------+------------------------+----------
+        Fred |       Upper Hutt | 9000000002 |   234bcd |          {'Passenger'} |       22
+        Swen |       Wellington | 9000000001 |   123abc |          {'Passenger'} |       22
+     William |      Maintenance | 9000000004 |   678bcf | {'Goods', 'Passenger'} |       22
+        Jane |       Lower Hutt | 9000000003 |   345cde | {'Goods', 'Passenger'} |       21
+
+(4 rows)
+ington','Diesel');
+cqlsh:wmetro> select * from vehicles;
+
+ vehicle_id | status      | type
+------------+-------------+-----------
+     WR1236 |  Upper Hutt | Kiwi Rail
+     WR1234 | Maintenance |  Gulliver
+     WR1238 |  Wellington |    Diesel
+     WR1235 |   Lowe Hutt |  Gulliver
+     WR1237 |  Wellington | Kiwi Rail
+
+(5 rows)
+;
+cqlsh:wmetro> select * from vehicles;
+
+ vehicle_id | status     | type
+------------+------------+-----------
+     WR1236 | Upper Hutt | Kiwi Rail
+     WR1234 | Upper Hutt |  Gulliver
+     WR1238 | Wellington |    Diesel
+     WR1235 |  Lowe Hutt |  Gulliver
+     WR1237 | Wellington | Kiwi Rail
+
+(5 rows)
+cqlsh:wmetro> alter table vehicle add daily_distance ;
+SyntaxException: line 1:39 no viable alternative at input ';' (alter table vehicle add daily_distance [;])
+cqlsh:wmetro> alter table vehicles add daily_distance;
+SyntaxException: line 1:39 no viable alternative at input ';' (alter table vehicles add daily_distance[;])
+cqlsh:wmetro> alter table vehicles add daily_distance int;
+cqlsh:wmetro> update vehicles set daily_distance=180 where vehicle_id="WR1236";
+SyntaxException: line 1:64 no viable alternative at input ';' (...set daily_distance=180 where vehicle_id=["WR123]6";)
+cqlsh:wmetro> select* from veicles;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="unconfigured table veicles"
+cqlsh:wmetro> select * from vehicles;
+
+ vehicle_id | daily_distance | status     | type
+------------+----------------+------------+-----------
+     WR1236 |           null | Upper Hutt | Kiwi Rail
+     WR1234 |           null | Upper Hutt |  Gulliver
+     WR1238 |           null | Wellington |    Diesel
+     WR1235 |           null |  Lowe Hutt |  Gulliver
+     WR1237 |           null | Wellington | Kiwi Rail
+
+(5 rows)
+;
+;
+;
+;
+;
+cqlsh:wmetro> select * from vehicles;
+
+ vehicle_id | daily_distance | status     | type
+------------+----------------+------------+-----------
+     WR1236 |            180 | Upper Hutt | Kiwi Rail
+     WR1234 |            200 | Upper Hutt |  Gulliver
+     WR1238 |            300 | Wellington |    Diesel
+     WR1235 |             50 |  Lowe Hutt |  Gulliver
+     WR1237 |            300 | Wellington | Kiwi Rail
+
+(5 rows)
+HICLE_ID='WR1235';
+cqlsh:wmetro> SELECT * FROM VEHICLE_USAGE;
+
+ vehicle_id | total_distance
+------------+----------------
+     WR1236 |           3500
+     WR1234 |           3000
+     WR1235 |           5050
+     WR1237 |           5300
+
+(4 rows)
+
+cqlsh:wmetro> begin batch
+,longitude,time,distance) values('LINE3',2,'Melling',-43.20,171.60,1540,330)
+,longitude,time,distance) values('LINE3',2,'Waterloo',-53.50,165.70,0940,40,0)
+,longitude,time,distance) values('LINE4',2,'Melling',-43.20,171.60,1540,0) 
+)
+          ... apply batch ;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Unmatched column names/values"
+,longitude,time,distance) values('LINE3',2,'Melling',-43.20,171.60,1540,330.0)
+          ... ;
+cqlsh:wmetro> begin batch
+)
+,longitude,time,distance) values('LINE4',2,'Melling',-43.20,171.60,1540,0.0) 
+          ... apply batch ;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Unmatched column names/values"
+;
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Unmatched column names/values"
+,longitude,time,distance) values('LINE3',2,'Waterloo',-53.50,165.70,0940,0.0);
+,longitude,time,distance) values('LINE4',2,'Melling',-43.20,171.60,1540,0.0)
+          ... ;
+0);
+InvalidRequest: Error from server: code=2200 [Invalid query] message="Unmatched column names/values"
+,longitude,time,distance) values('LINE4',2,'Waterloo',-53.50,165.70,0940,330.0)
+          ... ;
+cqlsh:wmetro> SELECT * FROM TIME_TABLE;
+
+ line_name | station_name | distance | latitude | longitude | service_num | time
+-----------+--------------+----------+----------+-----------+-------------+------
+     LINE2 |   Upper Hutt |        0 |   -41.12 |    175.07 |           2 | 1550
+     LINE2 |   Wellington |     34.3 |   -40.28 |    174.77 |           2 | 1130
+     LINE3 |      Melling |      330 |    -43.2 |     171.6 |           2 | 1540
+     LINE3 |     Waterloo |        0 |    -53.5 |     165.7 |           2 |  940
+     LINE4 |      Melling |        0 |    -43.2 |     171.6 |           2 | 1540
+     LINE4 |     Waterloo |      330 |    -53.5 |     165.7 |           2 |  940
+     LINE1 |   Upper Hutt |     34.3 |   -41.12 |    175.07 |           2 | 1025
+     LINE1 |   Wellington |        0 |   -40.28 |    174.77 |           2 |  605
+
+(8 rows)
+' and station_name='Waterloo';
+SyntaxException: line 1:7 no viable alternative at input 'table' (update [table]...)
+station_name='Waterloo';
+station_name='Melling';
+cqlsh:wmetro> begin batch 
+station_name='Waterloo'
+station_name='Melling'
+          ... apply batch ;
+es(15,'2020-03-04',-52.10,168.90,67);
+cqlsh:wmetro> select * from time_table;
+
+ line_name | station_name | distance | latitude | longitude | service_num | time
+-----------+--------------+----------+----------+-----------+-------------+------
+     LINE2 |   Upper Hutt |        0 |   -41.12 |    175.07 |           2 | 1550
+     LINE2 |   Wellington |     34.3 |   -40.28 |    174.77 |           2 | 1130
+     LINE3 |      Melling |      330 |    -43.2 |     171.6 |           1 | 1540
+     LINE3 |     Waterloo |        0 |    -53.5 |     165.7 |           1 |  940
+     LINE4 |      Melling |        0 |    -43.2 |     171.6 |           1 | 1540
+     LINE4 |     Waterloo |      330 |    -53.5 |     165.7 |           1 |  940
+     LINE1 |   Upper Hutt |     34.3 |   -41.12 |    175.07 |           2 | 1025
+     LINE1 |   Wellington |        0 |   -40.28 |    174.77 |           2 |  605
+
+(8 rows)
+cqlsh:wmetro> SELECT * FROM DATA_POINT;
+
+ sequence                        | day | latitude | longitude | speed
+---------------------------------+-----+----------+-----------+-------
+ 2020-03-04 00:00:00.000000+0000 |  15 |    -52.1 |     168.9 |    67
+ 2020-03-09 21:30:25.000000+0000 |  14 |    -44.5 |     160.6 |    75
+ 2020-03-09 21:07:40.000000+0000 |  14 |    -42.5 |     171.9 |    75
+ 2020-03-10 00:00:00.000000+0000 |  14 |    -42.3 |     171.5 |    76
+
+(4 rows)
+cqlsh:wmetro> exit
+
+
+
+
+COMMANDS EXECUTED
+
+create keyspace wmetro with replication={'class':'SimpleStrategy','replication_factor':1};
+describe system_schema.keyspaces;
+use wmetro;
+
+
+create table driver(driver_name text primary key,password text,mobile bigint,current_position text,skill set<text>);
+begin batch 
+insert into driver(driver_name,password,mobile,current_position,skill) values('Swen','123abc',9000000001,'Wellington',{'Passenger'})
+insert into driver(driver_name,password,mobile,current_position,skill) values('Fred','234bcd',9000000002,'Upper Hutt',{'Passenger'})
+insert into driver(driver_name,password,mobile,current_position,skill) values('Jane','345cde',9000000003,'Lower Hutt',{'Goods'})
+apply batch;
+select * from driver;
+
+
+create table vehicles(vehicle_id text primary key,status text,type text);
+begin batch
+insert into vehicles(vehicle_id,status,type) values('WR1234','Maintenance','Gulliver');
+insert into vehicles(vehicle_id,status,type) values('WR1235','Lowe Hutt','Gulliver');
+insert into vehicles(vehicle_id,status,type) values('WR1236','Upper Hutt','Kiwi Rail');
+insert into vehicles(vehicle_id,status,type) values('WR1237','Wellington','Kiwi Rail');
+apply batch;
+select * from vehicles;
+
+
+create table time_table(line_name text, service_num int,station_name text,latitude double,longitude double,time int,distance double, primary key(line_name, station_name));
+begin batch 
+insert into
+time_table(line_name,service_num,station_name,latitude,longitude,time,distance) values('LINE1',2,'Wellington',-40.28,174.77,0605,0.0)
+insert into time_table(line_name,service_num,station_name,latitude,longitude,time,distance) values('LINE1',2,'Upper Hutt',-41.12,175.07,1025,34.3) 
+insert into time_table(line_name,service_num,station_name,latitude,longitude,time,distance) values('LINE2',2,'Wellington',-40.28,174.77,1130,34.3) 
+insert into time_table(line_name,service_num,station_name,latitude,longitude,time,distance) values('LINE2',2,'Upper Hutt',-41.12,175.07,1550,0.0)
+apply batch;
+select * from time_table;
+
+
+create table vehicle_usage(vehicle_id text primary key,total_distance counter);
+update vehicle_usage set total_distance = total_distance + 3000 where vehicle_id='WR1234';
+update vehicle_usage set total_distance = total_distance + 5000 where vehicle_id='WR1235';
+update vehicle_usage set total_distance = total_distance + 3500 where vehicle_id='WR1236';
+update vehicle_usage set total_distance = total_distance + 5300 where vehicle_id='WR1237';
+select * from VEHICLE_USAGE;
+
+
+CREATE table data_point(day int,sequence timestamp primary key,latitude double,longitude double,speed double);
+begin batch 
+insert into data_point(day,sequence,latitude,longitude,speed) values(14,'2020-03-10',-42.30,171.50,76) 
+insert into data_point(day,sequence,latitude,longitude,speed) values(14,'2020-03-10 10:07:40+1300',-42.50,171.90,75)
+insert into data_point(day,sequence,latitude,longitude,speed) values(14,'2020-03-10 10:30:25+1300',-44.50,160.60,75)
+apply batch;
+select * from data_point;
+
+
+insert into driver(driver_name,password,mobile,current_position,skill) values('William','678bcf',9000000004,'Wellington',{'Goods','Passenger'})
+select * from driver;
+
+
+update driver set password='678bcf' where driver_name='William' if password='789gfh';
+select * from driver;
+
+
+update driver set current_position='Maintenance' where driver_name='William';
+select * from driver;
+
+
+update driver set skill={'Passenger', 'Goods'} where driver_name='Jane';
+select * from driver;
+
+
+alter table driver add workdays int ;
+update driver set workdays=22 where driver_name='William';
+update driver set workdays=22 where driver_name='Fred';
+update driver set workdays=21 where driver_name='Jane';
+update driver set workdays=22 where driver_name='Swen';
+
+
+insert into vehicles(vehicle_id,status,type) values('WR1238','Wellington','Diesel');
+select * from vehicles;
+
+
+update vehicles set status='Upper Hutt' where vehicle_id='WR1234';
+select * from vehicles;
+
+
+alter table vehicles add daily_distance int;
+update vehicles set daily_distance = 200 where vehicle_id='WR1234';
+update vehicles set daily_distance = 180 where vehicle_id='WR1236';
+update vehicles set daily_distance = 300 where vehicle_id='WR1237';
+update vehicles set daily_distance = 50 where vehicle_id='WR1235';
+update vehicles set daily_distance = 300 where vehicle_id='WR1238';
+select * from vehicles;
+
+
+
+UPDATE VEHICLE_USAGE SET TOTAL_DISTANCE=TOTAL_DISTANCE+50 WHERE VEHICLE_ID='WR1235';
+SELECT * FROM VEHICLE_USAGE;
+
+
+begin batch
+insert into time_table(line_name,service_num,station_name,latitude,longitude,time,distance) values('LINE3',2,'Melling',-43.20,171.60,1540,330.0)
+insert into time_table(line_name,service_num,station_name,latitude,longitude,time,distance) values('LINE3',2,'Waterloo',-53.50,165.70,0940,0.0)
+insert into time_table(line_name,service_num,station_name,latitude,longitude,time,distance) values('LINE4',2,'Melling',-43.20,171.60,1540,0.0) 
+insert into time_table(line_name,service_num,station_name,latitude,longitude,time,distance) values('LINE4',2,'Waterloo',-53.50,165.70,0940,330.0)
+apply batch ;
+SELECT * FROM TIME_TABLE;
+
+
+update time_table set service_num = 1 where line_name='LINE4' and station_name='Waterloo';
+update time_table set service_num = 1 where line_name='LINE4' and station_name='Melling';
+update time_table set service_num = 1 where line_name='LINE3' and station_name='Waterloo';
+update time_table set service_num = 1 where line_name='LINE3' and station_name='Melling';
+select * from time_table;
+
+insert into data_point(day,sequence,latitude,longitude,speed) values(15,'2020-03-04',-52.10,168.90,67);
+SELECT * FROM DATA_POINT;
+
+EXIT
