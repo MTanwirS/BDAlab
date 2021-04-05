@@ -1,0 +1,191 @@
+1. Create a new collection
+
+ use student
+
+2. Insert a value
+
+db.student.insert({
+    "Name" : "abc",
+    "RollNo:" : 1,
+    "Age" : 21,
+    "ContactNo" : "9000000001",
+    "EmailId": "abc@example.com"
+})
+
+3. Insert multiple values at once
+
+var Mystudents = [
+    {
+        "Name" : "def",
+        "RollNo:" : 2,
+        "Age" : 21,
+        "ContactNo" : "9000000002",
+        "EmailId": "def@example.com"
+    },
+   {
+        "Name" : "ghi",
+        "RollNo:" : 3,
+        "Age" : 22,
+        "ContactNo" : "9000000003",
+        "EmailId": "ghi@example.com"
+    },
+   {
+        "Name" : "jkl",
+        "RollNo:" : 4,
+        "Age" : 21,
+        "ContactNo" : "9000000004",
+        "EmailId": "jkl@example.com"
+    },
+    {
+        "Name" : "mno",
+        "RollNo:" : 5,
+        "Age" : 22,
+        "ContactNo" : "9000000005",
+        "EmailId": "mno@example.com"
+    },
+]
+
+db.student.insert(Mystudents);
+
+
+4. Print all current values
+
+db.getCollection('student').find({}).forEach(printjson)
+
+{
+	"_id" : ObjectId("60aaca0014c26c4c599fc88e"),
+	"Name" : "abc",
+	"RollNo:" : 1,
+	"Age" : 21,
+	"ContactNo" : "90000000001",
+	"EmailId" : "abc@example.com"
+}
+{
+	"_id" : ObjectId("60aacb7214c26c4c599fc893"),
+	"Name" : "def",
+	"RollNo:" : 3,
+	"Age" : 21,
+	"ContactNo" : "9000000002",
+	"EmailId" : "def@example.com"
+}
+{
+	"_id" : ObjectId("60aacb7214c26c4c599fc894"),
+	"Name" : "ghi",
+	"RollNo:" : 3,
+	"Age" : 22,
+	"ContactNo" : "9000000003",
+	"EmailId" : "ghi@example.com"
+}
+{
+	"_id" : ObjectId("60aacb7214c26c4c599fc895"),
+	"Name" : "jkl",
+	"RollNo:" : 4,
+	"Age" : 21,
+	"ContactNo" : "9000000004",
+	"EmailId" : "jkl@example.com"
+}
+{
+	"_id" : ObjectId("60aacb7214c26c4c599fc896"),
+	"Name" : "mno",
+	"RollNo:" : 5,
+	"Age" : 22,
+	"ContactNo" : "9000000005",
+	"EmailId" : "mno@example.com"
+}
+
+5.  Update RollNo of a student
+
+db.student.update({"Name" : "abc"},{$set: { "RollNo" : 10}})
+
+db.getCollection('student').find({"RollNo:":10}).forEach(printjson)
+
+{
+	"_id" : ObjectId("60aaca0014c26c4c599fc88e"),
+	"Name" : "abc",
+	"RollNo:" : 10,
+	"Age" : 21,
+	"ContactNo" : "90000000001",
+	"EmailId" : "abc@example.com"
+}
+
+6.  Update Name of a student
+
+db.student.update({"Name" : "abc"},{$set: { "Name" : "FEM"}})
+
+db.getCollection('student').find({"Name" : "FEM"}).forEach(printjson)
+
+{
+	"_id" : ObjectId("60aaca0014c26c4c599fc88e"),
+	"Name" : "FEM",
+	"RollNo:" : 1,
+	"Age" : 21,
+	"ContactNo" : "90000000001",
+	"EmailId" : "abc@example.com"
+}
+
+7.  Export to json
+
+mongoexport --db testdb --collection student --out C:\Users\Desktop\student.json
+
+{"_id":{"$oid":"60aaca0014c26c4c599fc88e"},"Name":"FEM","age":21.0,"Contact":"9000000001","email":"abc@example.com","RollNo":10.0}
+
+{"_id":{"$oid":"60aacb7214c26c4c599fc893"},"Name":"def","RollNo:":2.0,"Age":21.0,"ContactNo":"9000000002","EmailId":"def@lab.com"}
+
+{"_id":{"$oid":"60aacb7214c26c4c599fc894"},"Name":"ghi","RollNo:":3.0,"Age":22.0,"ContactNo":"9000000003","EmailId":"ghi@lab.com"}
+
+{"_id":{"$oid":"60aacb7214c26c4c599fc895"},"Name":"jkl","RollNo:":4.0,"Age":21.0,"ContactNo":"9000000004","EmailId":"jkl@lab.com"}
+
+{"_id":{"$oid":"60aacb7214c26c4c599fc896"},"Name":"mno","RollNo:":5.0,"Age":22.0,"ContactNo":"9000000005","EmailId":"mno@lab.com"}
+
+8.  Drop student
+
+db.getCollection('student').drop()
+
+9.  Import from exported file
+
+mongoimport --db stud --collection stud C:\Users\Desktop\student.json
+
+10. Print values
+use stud
+db.getCollection('stud').find({}).forEach(printjson)
+
+{
+	"_id" : ObjectId("60aaca0014c26c4c599fc88e"),
+	"Name" : "abc",
+	"RollNo:" : 1,
+	"Age" : 21,
+	"ContactNo" : "90000000001",
+	"EmailId" : "abc@example.com"
+}
+{
+	"_id" : ObjectId("60aacb7214c26c4c599fc893"),
+	"Name" : "def",
+	"RollNo:" : 3,
+	"Age" : 21,
+	"ContactNo" : "9000000002",
+	"EmailId" : "def@example.com"
+}
+{
+	"_id" : ObjectId("60aacb7214c26c4c599fc894"),
+	"Name" : "ghi",
+	"RollNo:" : 3,
+	"Age" : 22,
+	"ContactNo" : "9000000003",
+	"EmailId" : "ghi@example.com"
+}
+{
+	"_id" : ObjectId("60aacb7214c26c4c599fc895"),
+	"Name" : "jkl",
+	"RollNo:" : 4,
+	"Age" : 21,
+	"ContactNo" : "9000000004",
+	"EmailId" : "jkl@example.com"
+}
+{
+	"_id" : ObjectId("60aacb7214c26c4c599fc896"),
+	"Name" : "mno",
+	"RollNo:" : 5,
+	"Age" : 22,
+	"ContactNo" : "9000000005",
+	"EmailId" : "mno@example.com"
+}
