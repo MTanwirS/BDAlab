@@ -1,0 +1,125 @@
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0$ sbin/start-all.sh 
+WARNING: Attempting to start all Apache Hadoop daemons as hdoop in 10 seconds.
+WARNING: This is not a recommended production deployment configuration.
+WARNING: Use CTRL-C to abort.
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [ubuntu]
+Starting resourcemanager
+Starting nodemanagers
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0$ hdfs dfs -mkdir /input_dir 
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0$ hdfs dfs -ls /
+Found 1 items
+drwxr-xr-x   - hdoop supergroup          0 2021-05-04 08:31 /input_dir
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0$ cd ..
+hdoop@ubuntu:~/hadoop$ cd hadoop-3.3.0/
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0$ hdfs dfs -mkdir /input_dir 
+mkdir: `/input_dir': File exists
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0$ hdfs dfs -ls /
+Found 1 items
+drwxr-xr-x   - hdoop supergroup          0 2021-05-04 08:31 /input_dir
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0$ cd bin
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/bin$ cd ..
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0$ cd sbin
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/sbin$ hdfs dfs -mkdir /input_dir 
+mkdir: `/input_dir': File exists
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/sbin$ hdfs dfs -ls /
+Found 1 items
+drwxr-xr-x   - hdoop supergroup          0 2021-05-04 08:31 /input_dir
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/sbin$ cd ..
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0$ cd share/hadoop/mapreduce/
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/share/hadoop/mapreduce$ hdfs dfs -put ~/input.txt /input_dir/input.txt 
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/share/hadoop/mapreduce$ hdfs dfs -ls /
+Found 1 items
+drwxr-xr-x   - hdoop supergroup          0 2021-05-04 08:32 /input_dir
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/share/hadoop/mapreduce$ hadoop jar hadoop-mapreduce-examples-3.3.0.jar wordcount /input_dir /output_dir 
+2021-05-04 08:33:36,338 INFO client.DefaultNoHARMFailoverProxyProvider: Connecting to ResourceManager at /127.0.0.1:8032
+2021-05-04 08:33:36,789 INFO mapreduce.JobResourceUploader: Disabling Erasure Coding for path: /tmp/hadoop-yarn/staging/hdoop/.staging/job_1620142240400_0001
+2021-05-04 08:33:37,050 INFO input.FileInputFormat: Total input files to process : 1
+2021-05-04 08:33:37,146 INFO mapreduce.JobSubmitter: number of splits:1
+2021-05-04 08:33:37,347 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1620142240400_0001
+2021-05-04 08:33:37,347 INFO mapreduce.JobSubmitter: Executing with tokens: []
+2021-05-04 08:33:37,649 INFO conf.Configuration: resource-types.xml not found
+2021-05-04 08:33:37,649 INFO resource.ResourceUtils: Unable to find 'resource-types.xml'.
+2021-05-04 08:33:38,131 INFO impl.YarnClientImpl: Submitted application application_1620142240400_0001
+2021-05-04 08:33:38,193 INFO mapreduce.Job: The url to track the job: http://ubuntu:8088/proxy/application_1620142240400_0001/
+2021-05-04 08:33:38,193 INFO mapreduce.Job: Running job: job_1620142240400_0001
+2021-05-04 08:33:50,677 INFO mapreduce.Job: Job job_1620142240400_0001 running in uber mode : false
+2021-05-04 08:33:50,681 INFO mapreduce.Job:  map 0% reduce 0%
+2021-05-04 08:34:01,923 INFO mapreduce.Job:  map 100% reduce 0%
+2021-05-04 08:34:11,111 INFO mapreduce.Job:  map 100% reduce 100%
+2021-05-04 08:34:12,142 INFO mapreduce.Job: Job job_1620142240400_0001 completed successfully
+2021-05-04 08:34:12,239 INFO mapreduce.Job: Counters: 54
+	File System Counters
+		FILE: Number of bytes read=38
+		FILE: Number of bytes written=527741
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=152
+		HDFS: Number of bytes written=20
+		HDFS: Number of read operations=8
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=2
+		HDFS: Number of bytes read erasure-coded=0
+	Job Counters 
+		Launched map tasks=1
+		Launched reduce tasks=1
+		Data-local map tasks=1
+		Total time spent by all maps in occupied slots (ms)=8813
+		Total time spent by all reduces in occupied slots (ms)=6239
+		Total time spent by all map tasks (ms)=8813
+		Total time spent by all reduce tasks (ms)=6239
+		Total vcore-milliseconds taken by all map tasks=8813
+		Total vcore-milliseconds taken by all reduce tasks=6239
+		Total megabyte-milliseconds taken by all map tasks=9024512
+		Total megabyte-milliseconds taken by all reduce tasks=6388736
+	Map-Reduce Framework
+		Map input records=3
+		Map output records=9
+		Map output bytes=79
+		Map output materialized bytes=38
+		Input split bytes=106
+		Combine input records=9
+		Combine output records=3
+		Reduce input groups=3
+		Reduce shuffle bytes=38
+		Reduce input records=3
+		Reduce output records=3
+		Spilled Records=6
+		Shuffled Maps =1
+		Failed Shuffles=0
+		Merged Map outputs=1
+		GC time elapsed (ms)=182
+		CPU time spent (ms)=2120
+		Physical memory (bytes) snapshot=458768384
+		Virtual memory (bytes) snapshot=5063098368
+		Total committed heap usage (bytes)=351272960
+		Peak Map Physical memory (bytes)=267317248
+		Peak Map Virtual memory (bytes)=2528882688
+		Peak Reduce Physical memory (bytes)=191451136
+		Peak Reduce Virtual memory (bytes)=2534215680
+	Shuffle Errors
+		BAD_ID=0
+		CONNECTION=0
+		IO_ERROR=0
+		WRONG_LENGTH=0
+		WRONG_MAP=0
+		WRONG_REDUCE=0
+	File Input Format Counters 
+		Bytes Read=46
+	File Output Format Counters 
+		Bytes Written=20
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/share/hadoop/mapreduce$ hdfs dfs -ls /output_dir 
+Found 2 items
+-rw-r--r--   1 hdoop supergroup          0 2021-05-04 08:34 /output_dir/_SUCCESS
+-rw-r--r--   1 hdoop supergroup         20 2021-05-04 08:34 /output_dir/part-r-00000
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/share/hadoop/mapreduce$ hdfs dfs -cat /output_dir/*
+bear	3
+car	2
+deer	4
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/share/hadoop/mapreduce$ hdfs dfs -cat /output_dir/part-r-00000
+bear	3
+car	2
+deer	4
+hdoop@ubuntu:~/hadoop/hadoop-3.3.0/share/hadoop/mapreduce$ 
