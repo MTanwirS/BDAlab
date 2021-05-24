@@ -1,0 +1,16 @@
+show dbs
+use studentdbs
+
+db.student_collection.insert({"_id":"001","Name":"abc","USN":"1BM001","Sem":6,"Dept":"CSE","CGPA":9.0,"Hobby":"Painting"})
+
+db.student_collection.insert({"_id":"002","Name":"bcd","USN":"1BM002","Sem":6,"Dept":"CSE","CGPA":2.0,"Hobby":"Coding"})
+
+db.student_collection.insert({"_id":"003","Name":"cde","USN":"1BM003","Sem":6,"Dept":"ISE","CGPA":7.0,"Hobby":"Sports"})
+
+db.student_collection.insert({"_id":"004","Name":"def","USN":"1BM004","Sem":6,"Dept":"ISE","CGPA":8.0,"Hobby":"Coding"})
+
+db.student_collection.find().foreach(printjson)
+
+db.student_collection.remove({"CGPA":2.0})
+
+db.student_collection.find().forEach(printjson)

@@ -1,0 +1,5 @@
+customer_id,customer_name,account_bal,account_type,branch_name
+100113,ghi,80001,savings,LOC01
+100114,jkl,90000,current,LOC02
+100111,abc,7000,savings,LOC01
+100112,def,8000,current,LOC02

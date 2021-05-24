@@ -1,0 +1,136 @@
+Connected to Test Cluster at 127.0.0.1:9042.
+[cqlsh 5.0.1 | Cassandra 3.11.10 | CQL spec 3.4.4 | Native protocol v4]
+Use HELP for help.
+cqlsh> CREATE KEYSPACE business with REPLICATION={'class':'SimpleStrategy','replication_factor':1};
+cqlsh> SELECT * FROM system_schema.keyspaces;
+
+ keyspace_name      | durable_writes | replication
+--------------------+----------------+-------------------------------------------------------------------------------------
+        system_auth |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+      system_schema |           True |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+ system_distributed |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
+             system |           True |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+      system_traces |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
+           business |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+
+(6 rows)
+cqlsh> DESCRIBE business;
+
+CREATE KEYSPACE business WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+
+cqlsh> use business;
+cqlsh:business> CREATE TABLE bank(
+            ... customer_id text primary key,
+            ... customer_name text,
+            ... account_bal double,
+            ... account_type text);
+cqlsh:business> 
+cqlsh:business> SELECT * FROM bank ;
+
+ customer_id | account_bal | account_type | customer_name
+-------------+-------------+--------------+---------------
+
+(0 rows)
+cqlsh:business> INSERT INTO bank(customer_id, customer_name,
+            ... account_bal ,account_type) VALUES
+            ... ('100111','abc',7000.00,'savings')
+            ... ;
+cqlsh:business> BEGIN BATCH
+            ... INSERT INTO bank(customer_id, customer_name,
+            ... account_bal ,account_type) VALUES
+            ... ('100112','def',8000.00,'current')
+            ... INSERT INTO bank(customer_id, customer_name,
+            ... account_bal ,account_type) VALUES
+            ... ('100113','ghi',80001.00,'savings')
+            ... INSERT INTO bank(customer_id, customer_name,
+            ... account_bal ,account_type) VALUES
+            ... ('100114','jkl',90000.00,'current')
+            ... APPLY BATCH ;
+cqlsh:business> SELECT * FROM bank;
+
+ customer_id | account_bal | account_type | customer_name
+-------------+-------------+--------------+---------------
+      100112 |        8000 |      current |           def
+      100114 |       90000 |      current |           jkl
+      100111 |        7000 |      savings |           abc
+      100113 |       80001 |      savings |           ghi
+
+(4 rows)
+cqlsh:business> CREATE INDEX  ON bank(account_bal);
+cqlsh:business> 
+cqlsh:business> SELECT customer_name,account_bal
+            ... FROM bank 
+            ... WHERE account_bal > 80000.00
+            ... ALLOW FILTERING;
+
+ customer_name | account_bal
+---------------+-------------
+           jkl |       90000
+           ghi |       80001
+
+(2 rows)
+cqlsh:business> ALTER TABLE bank ADD branch_name text ;
+cqlsh:business> 
+cqlsh:business> UPDATE bank SET branch_name='LOC01'
+            ... WHERE customer_id='100111';
+cqlsh:business> BEGIN BATCH
+            ... UPDATE bank SET branch_name='LOC02'
+            ... WHERE customer_id='100112'
+            ... UPDATE bank SET branch_name='LOC01'
+            ... WHERE customer_id='100113'
+            ... UPDATE bank SET branch_name='LOC02'
+            ... WHERE customer_id='100114'
+            ... APPLY BATCH;
+cqlsh:business> SELECT * FROM bank ;
+
+ customer_id | account_bal | account_type | branch_name | customer_name
+-------------+-------------+--------------+-------------+---------------
+      100112 |        8000 |      current |       LOC02 |           def
+      100114 |       90000 |      current |       LOC02 |           jkl
+      100111 |        7000 |      savings |       LOC01 |           abc
+      100113 |       80001 |      savings |       LOC01 |           ghi
+
+(4 rows)
+cqlsh:business> COPY bank(customer_id, customer_name, account_bal,
+            ... account_type, branch_name) TO 
+            ...  "/content/apache-cassandra-3.11.10/bank.csv"
+            ... ;
+Improper COPY command.
+cqlsh:business> COPY bank(customer_id, customer_name, account_bal,
+            ... account_type, branch_name) TO 
+            ... '/content/apache-cassandra-3.11.10/bank.csv'
+            ...  WITH HEADER = TRUE;
+Using 1 child processes
+
+Starting copy of business.bank with columns [customer_id, customer_name, account_bal, account_type, branch_name].
+Processed: 4 rows; Rate:       7 rows/s; Avg. rate:       9 rows/s
+4 rows exported to 1 files in 0.436 seconds.
+cqlsh:business> TRUNCATE bank ;
+cqlsh:business> SELECT * FROM bank ;
+
+ customer_id | account_bal | account_type | branch_name | customer_name
+-------------+-------------+--------------+-------------+---------------
+
+(0 rows)
+cqlsh:business>  COPY bank(customer_id, customer_name, account_bal,
+            ... account_type, branch_name) FROM 
+            ... '/content/apache-cassandra-3.11.10/bank.csv';
+Using 1 child processes
+
+Starting copy of business.bank with columns [customer_id, customer_name, account_bal, account_type, branch_name].
+Failed to import 1 rows: ParseError - Failed to parse account_bal : could not convert string to float: account_bal,  given up without retries
+Failed to process 1 rows; failed rows written to import_business_bank.err
+Processed: 5 rows; Rate:       8 rows/s; Avg. rate:      12 rows/s
+4 rows imported from 1 files in 0.409 seconds (0 skipped).
+cqlsh:business> SELECT * FROM bank 
+            ... ;
+
+ customer_id | account_bal | account_type | branch_name | customer_name
+-------------+-------------+--------------+-------------+---------------
+      100112 |        8000 |      current |       LOC02 |           def
+      100114 |       90000 |      current |       LOC02 |           jkl
+      100111 |        7000 |      savings |       LOC01 |           abc
+      100113 |       80001 |      savings |       LOC01 |           ghi
+
+(4 rows)
+cqlsh:business> exit
